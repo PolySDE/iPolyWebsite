@@ -61,7 +61,7 @@
 						
 						<!-- Logo -->
 							<h1 id="logo"><a href="?p=home" class="disabled"><img src="images/IPoly_logo.svg" style="width:auto; height:200px; margin-bottom:20px; margin-top:0px"><br>iPoly High School</a></h1>
-							<p>Where Common Core meets PBL...</p>
+							<p>Where Common Core meets Project-Based Learning...</p>
 						
 						<!-- Nav -->
 							<nav id="nav">
