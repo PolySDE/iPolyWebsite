@@ -129,7 +129,7 @@
                                         	<li>
                                             	<a href=""><div style="float:left;">9th Grade</div><i class="fa fa-arrow-right" style="font-size:12px; float:right;"></i><div style="clear:both;"></div></a>
                                                 <ul>
-                                                	<li><a href="#">9th Grade Student Schedule</a></li>
+                                                	<li><a href="images/9th_Grade_Block_Schedule_2013-14.pdf" target="_blank">9th Grade Student Schedule</a></li>
                                                     <li><a href="?p=9th_english">English</a></li>
                                                     <li><a href="?p=9th_math">Math</a></li>
                                                     <li><a href="?p=9th_science">Science</a></li>
@@ -139,7 +139,7 @@
                                         	<li>
                                             	<a href=""><div style="float:left;">10th Grade</div><i class="fa fa-arrow-right" style="font-size:12px; float:right;"></i><div style="clear:both;"></div></a>
                                                 <ul>
-                                                	<li><a href="#">10th Grade Student Schedule</a></li>
+                                                	<li><a href="images/10th_Grade_Block_Schedule_2013-14.pdf" target="_blank">10th Grade Student Schedule</a></li>
                                                     <li><a href="?p=10th_english">English</a></li>
                                                     <li><a href="?p=10th_math">Math</a></li>
                                                     <li><a href="?p=10th_science">Science</a></li>
@@ -149,7 +149,7 @@
                                         	<li>
                                             	<a href=""><div style="float:left;">11th Grade</div><i class="fa fa-arrow-right" style="font-size:12px; float:right;"></i><div style="clear:both;"></div></a>
                                                 <ul>
-                                                	<li><a href="#">11th Grade Student Schedule</a></li>
+                                                	<li><a href="images/11th_Grade_Block_Schedule_2013-14.pdf" target="_blank">11th Grade Student Schedule</a></li>
                                                     <li><a href="?p=11th_english">English</a></li>
                                                     <li><a href="?p=11th_math">Math</a></li>
                                                     <li><a href="?p=11th_science">Science</a></li>
@@ -159,7 +159,7 @@
                                             <li>
                                             	<a href=""><div style="float:left;">12th Grade</div><i class="fa fa-arrow-right" style="font-size:12px; float:right;"></i><div style="clear:both;"></div></a>
                                                 <ul>
-                                                	<li><a href="#">12th Grade Student Schedule</a></li>
+                                                	<li><a href="images/12th_Grade_Block_Schedule_2013-14.pdf" target="_blank">12th Grade Student Schedule</a></li>
                                                     <li><a href="?p=12th_english">English</a></li>
                                                     <li><a href="?p=12th_math">Math</a></li>
                                                     <li><a href="?p=12th_science">Science</a></li>
