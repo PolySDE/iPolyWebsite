@@ -200,7 +200,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                    	<a class="fa fa-group" href="http://198.189.109.115/parent/">Aeries</a>
+                                    	<a class="fa fa-group" href="https://studentinfo.lacoemis.org/ipolyparent/LoginParent.aspx?page=default.aspx" target="_blank"><span>Grades</span></a>
                                         </li>
 								</ul>
 							</nav>
