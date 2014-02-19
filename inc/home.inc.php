@@ -155,11 +155,7 @@
 												<li>
 													<!-- Highlight -->
 														<article class="is-highlight">
-															<a href="?p=about_support" class="image"><img src="images/homeside1.gif" alt="" /></a>
-															<a href="?p=about_ptsa" class="image"><img src="images/homeside2.jpeg" alt="" /></a>
-															<a href="?p=about_ptsa" class="image"><img src="images/homeside3.png" alt="" /></a>
-															<a href="?p=about_ptsa" class="image"><img src="images/homeside4.jpg" alt="" /></a>
-															<a href="?p=about_ptsa" class="image"><img src="images/homeside5.jpg" alt="" /></a>
+															
 														</article>												
                                                 </li>
                                                 

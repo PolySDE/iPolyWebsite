@@ -114,6 +114,35 @@
 
 				<!-- Copyright -->
 					<div id="copyright" class="container">
+                    	<div style="width:auto; margin-left:auto; margin-right:auto;">
+                            <div class="row">
+                                <div class="2u">
+                                    <section>
+                                    <a href="?p=about_support" class="image"><img src="images/homeside1.gif" alt=""/></a>
+                                    </section>
+                                </div>
+                                <div class="2u">
+                                    <section>
+                                    <a href="?p=about_ptsa" class="image"><img src="images/homeside2.jpeg" alt=""/></a>
+                                    </section>
+                                </div>
+                                <div class="2u">
+                                    <section>
+                                    <a href="?p=about_ptsa" class="image image-full"><img src="images/homeside3.png" alt="" /></a>
+                                    </section>
+                                </div>
+                                <div class="2u">
+                                    <section>
+                                    <a href="?p=about_ptsa" class="image image-full"><img src="images/homeside4.jpg" alt="" /></a>
+                                    </section>
+                                </div>
+                                <div class="2u">
+                                    <section>
+                                    <a href="?p=about_ptsa" class="image image-full"><img src="images/homeside5.jpg" alt="" /></a>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
 						<ul class="links">
 							<li>&copy; iPoly High School. All rights reserved</li>
 							<? /*
