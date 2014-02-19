@@ -10,6 +10,7 @@ if($_POST['submit']=="Save" && isset($_SESSION['is_admin'])){
 	$tempObject = new PolyPage($pageType, $pageTitle);
 	$tempObject->setPageContent($pageContent);
 	$mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
+	makeChange($page, $_SESSION['username'], $tempObject->serializeThis());
 	if($stmt = $mysqli -> prepare("UPDATE `pages` SET object=? WHERE pageid=?;")){
 				$stmt -> bind_param("ss",$tempObject->serializeThis(), $page);
 				$stmt -> execute();
