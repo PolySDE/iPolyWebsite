@@ -195,9 +195,9 @@
                                     <li>
                                     	<a class="fa fa-envelope" href=""><span>Contact</span></a>
                                         <ul>
-                                        	<li><a href="?p=contact_">Contact Information</a></li>
-                                            <li><a href="?p=contact_">Calendar</a></li>
-                                            <li><a href="?p=contact_">iPoly High School Map</a></li>
+                                        	<li><a href="?p=contact_info">Contact Information</a></li>
+                                            <li><a href="?p=contact_calendar">Calendar</a></li>
+                                            <li><a href="?p=contact_map">iPoly High School Map</a></li>
                                         </ul>
                                     </li>
                                     <li>
