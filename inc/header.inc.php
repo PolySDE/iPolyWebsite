@@ -21,13 +21,17 @@
 		<script src="js/config.js"></script>
 		<script src="js/skel.min.js"></script>
 		<script src="js/skel-panels.min.js"></script>
-                <script src="js/unslider.js"></script>
-        
+        <script src="js/unslider.js"></script>
         <script src="js/tinymce/tinymce.min.js"></script>
 		<script>
                 tinymce.init({
 					selector:'textarea.tinymce',
 					content_css: "css/style.css, css/style-desktop.css",
+					style_formats: [
+        {title: 'Image Class', classes: 'image'},
+		{title: 'Image-Right Class', classes: 'image, image-right'},
+		{title: 'Image-Full Class', classes: 'image-full'}
+    ],
 					plugins: [
                  "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
                  "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
@@ -53,17 +57,13 @@
 		</noscript>
 	</head>
 	<body class="homepage">
-
 		<!-- Header Wrapper -->
 			<div id="header-wrapper">
-						
 				<!-- Header -->
 					<div id="header" class="container">
-						
 						<!-- Logo -->
 							<h1 id="logo"><a href="?p=home" class="disabled"><img src="images/IPoly_logo.svg" style="width:auto; height:200px; margin-bottom:20px; margin-top:0px"><br>iPoly High School</a></h1>
 							<p>Where Common Core meets Project-Based Learning...</p>
-						
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
@@ -201,8 +201,8 @@
                                         </ul>
                                     </li>
                                     <li>
-                                    	<a class="fa fa-group" href="https://studentinfo.lacoemis.org/ipolyparent/LoginParent.aspx?page=default.aspx" target="_blank"><span>Grades</span></a>
-                                        </li>
+										<a class="fa fa-group" href="https://studentinfo.lacoemis.org/ipolyparent/LoginParent.aspx?page=default.aspx" target="_blank"><span>Grades</span></a>
+									</li>
 								</ul>
 							</nav>
 
