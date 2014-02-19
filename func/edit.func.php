@@ -35,8 +35,8 @@ if($_POST['submit']=="Save" && isset($_SESSION['is_admin'])){
 		echo $mysqli->error;
 	}
 	$mysqli -> close();
-	//header('Location: ../?p='.$page);
+	header('Location: ../?p='.$page);
 } else {
-	//header('Location: ' . $_SERVER['HTTP_REFERER']);
+	header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
 ?>
