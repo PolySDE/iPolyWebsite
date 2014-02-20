@@ -101,7 +101,8 @@
 								
 							<!-- Sidebar -->
 								<div id="sidebar" class="4u">
-								
+								<?
+								/*
 									<!-- Excerpts -->
 										<section>
 											<ul class="divided">
@@ -162,7 +163,8 @@
 											</ul>
 										</section>
 										
-								
+								*/
+								?>
 								</div>
 
 						</div>
