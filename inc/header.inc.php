@@ -201,8 +201,14 @@
                                         </ul>
                                     </li>
                                     <li>
-										<a class="fa fa-group" href="https://studentinfo.lacoemis.org/ipolyparent/LoginParent.aspx?page=default.aspx" target="_blank"><span>Grades</span></a>
-									</li>
+                                    	<a class="fa fa-group" href=""><span>AERIES</span></a>
+                                        <ul>
+                                            <li><a href="https://studentinfo.lacoemis.org/ipolyparent" target="_blank">Parent</a></li>
+                                            <li><a href="https://studentinfo.lacoemis.org/ipolyparent" target="_blank">Student</a></li>
+                                            <li><a href="https://studentinfo.lacoemis.org/ipolyteacher" target="_blank">Teacher</a></li>
+                                            <li><a href="https://studentinfo.lacoemis.org/aeries.net" target="_blank">Staff</a></li>
+                                        </ul>
+                                    </li>
 								</ul>
 							</nav>
 
