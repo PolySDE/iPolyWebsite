@@ -55,6 +55,7 @@
 			<link rel="stylesheet" href="css/style.css" />
 			<link rel="stylesheet" href="css/style-desktop.css" />
 		</noscript>
+        <link rel="stylesheet" href="css/eaglefont.css" />
 	</head>
 	<body class="homepage">
 		<!-- Header Wrapper -->
@@ -201,7 +202,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                    	<a class="fa fa-group" href=""><span>AERIES</span></a>
+                                    	<a class="icon-e" href=""><span>AERIES</span></a>
                                         <ul>
                                             <li><a href="https://studentinfo.lacoemis.org/ipolyparent" target="_blank">Parent</a></li>
                                             <li><a href="https://studentinfo.lacoemis.org/ipolyparent" target="_blank">Student</a></li>
