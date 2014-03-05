@@ -190,6 +190,8 @@
 			border: 0;
 			border-top: solid 1px #3c3c3c;
 			padding: 0 1em 0 1em;
+			overflow:hidden;
+			/*text-overflow: ellipsis;*/
 		}
 		
 			#navPanel .link:first-child
