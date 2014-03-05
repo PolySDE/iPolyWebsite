@@ -34,6 +34,10 @@ if($query = $db->prepare("SELECT * FROM `pages`")){
 			}
 		}
 	}
+	if($page=="left"){
+		$pagefound = true;
+		include_once("inc/left.inc.php");
+	}
 	if($pagefound == false){
 		include_once("inc/home.inc.php");
 	}
