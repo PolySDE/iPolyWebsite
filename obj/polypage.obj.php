@@ -21,6 +21,8 @@ class PolyPage {
                                         <!-- Post -->
                                             <article class="is-post">
                                                 <header>
+                                                <div class="headerfix">
+                                                <h2 style="display:inline;"><? echo $this->pageTitle?></h2>
                                                 <?
 													if(isset($_SESSION['is_admin'])){
 														?>
@@ -28,9 +30,9 @@ class PolyPage {
 													<?
 													}
 													?>
-                                                    <h2 style="display:inline; margin-bottom:0"><? echo $this->pageTitle?></h2>
-                                                    
+                                                    </div>
                                                 </header>
+                                                
                                                                                                 <?
 //<span class="image image-full"><img src="images/pic04.jpg" alt="" /></span>
                                                 echo $this->pageContent;

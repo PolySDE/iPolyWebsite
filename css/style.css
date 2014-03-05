@@ -17,6 +17,20 @@
 /* Basic                                                                         */
 /*********************************************************************************/
 
+	.headerfix
+	{
+		position: relative;
+		padding-top:.5em;
+		padding-bottom:1em;
+		margin-bottom:.75em;
+		border-bottom: solid 2px #e5e5e5;
+		box-shadow: inset 0px -8px 0px 0px #fff, inset 0px -10px 0px 0px #e5e5e5;
+	}
+	.headerfix p {
+		margin-top:0;
+		margin-bottom:0;
+		display:inherit;
+	}
 	body
 	{
 		background: #f0f0f0;
