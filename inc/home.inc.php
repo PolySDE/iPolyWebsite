@@ -80,6 +80,8 @@
 					</section>
 			</div>
 		<!-- Main Wrapper -->
+        <?
+		/*
 			<div id="main-wrapper">
 				<!-- Main -->
 					<div id="main" class="container">
@@ -163,7 +165,7 @@
 											</ul>
 										</section>
 										
-								*/
+								
 								?>
 								</div>
 
@@ -171,3 +173,5 @@
 					</div>
 
 			</div>
+			*/
+			?>
