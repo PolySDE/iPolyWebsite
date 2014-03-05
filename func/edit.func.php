@@ -7,8 +7,10 @@ if($_POST['submit']=="Save" && isset($_SESSION['is_admin'])){
 	$pageContent = $_POST['pageContent'];
 	$page = $_POST['page'];
 	$pageType = $_POST['pageType'];
+	$sidebarContent = $_POST['sidebarContent'];
 	$tempObject = new PolyPage($pageType, $pageTitle);
 	$tempObject->setPageContent($pageContent);
+	$tempObject->setSidebarContent($sidebarContent);
 	$mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
 	if($stmt = $mysqli -> prepare("UPDATE `pages` SET object=? WHERE pageid=?;")){
 		$stmt -> bind_param("ss",$tempObject->serializeThis(), $page);
