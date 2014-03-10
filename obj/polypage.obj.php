@@ -103,7 +103,7 @@ class PolyPage {
 		}
 	}
 	function printEditPage(){
-		var_dump($this);
+		//var_dump($this);
 		if($this->pageType=="no-sidebar"){
 		?>
                 <!-- Main Wrapper -->
