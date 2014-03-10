@@ -1,1 +1,5 @@
 func/config.func.php
+func/config.func.php
+*.db
+*.xml
+func/config.func.php
