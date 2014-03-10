@@ -7,7 +7,7 @@
 							<h2>Questions or comments? <strong>Get in touch:</strong></h2>
 						</header>
 						<div class="row">
-							<div class="6u">
+							<div class="4u">
 								<section>
                                 <?
 								if(isset($_SESSION['is_admin'])){
@@ -31,12 +31,12 @@
 								?>
 									<form method="post" action="func/login.func.php">
                                     <div class="row half">
-                                    	<div class="6u">
+                                    	<div class="12u">
                                         	<input name="username" placeholder="Username" type="text" class="text" />
                                         </div>
                                     </div>
                                     <div class="row half">
-                                    	<div class="6u">
+                                    	<div class="12u">
                                         	<input name="password" placeholder="Password" type="password" class="text" />
                                         </div>
                                     </div>
@@ -74,15 +74,14 @@
 									?>
 								</section>
 							</div>
-							<div class="6u">
+							<div class="8u">
 								<section>
-									
                                     <p></p>
 									<div class="row">
-										<ul class="icons 6u">
+										<ul class="icons 8u">
 											<li class="fa fa-home">
                                             	3851 W. Temple Avenue,<br />
-                                                Pomona, CA 91768
+                                                Pomona, CA 91768-2537
 											</li>
 											<li class="fa fa-phone">
 												 Phone: (909) 839-2320<br />
@@ -92,7 +91,8 @@
 												<a href="mailto:ipoly@email.com">iPoly@email.com</a>
 											</li>
 										</ul>
-										<ul class="icons 6u">
+                                        <? /*
+										<ul class="icons 4u">
 											<li class="fa fa-twitter">
 												<a href="">iPoly Social Media</a>
 											</li>
@@ -106,6 +106,8 @@
 												<a href="">iPoly Social Media</a>
 											</li>
 										</ul>
+										*/
+										?>
 									</div>
 								</section>
 							</div>
@@ -128,23 +130,28 @@
                                 </div>
                                 <div class="2u">
                                     <section>
-                                    <a href="?p=about_ptsa" class="image image-full"><img src="images/homeside3.png" alt="" /></a>
+                                    <a href="http://www.lacoe.edu/" class="image"><img src="images/homeside3.png" alt="" /></a>
                                     </section>
                                 </div>
                                 <div class="2u">
                                     <section>
-                                    <a href="?p=about_ptsa" class="image image-full"><img src="images/homeside4.jpg" alt="" /></a>
+                                    <a href="http://www.csupomona.edu/" class="image"><img src="images/homeside4.jpg" alt="" /></a>
                                     </section>
                                 </div>
                                 <div class="2u">
                                     <section>
-                                    <a href="?p=about_ptsa" class="image image-full"><img src="images/homeside5.jpg" alt="" /></a>
+                                    <a href="http://www.ipolyhighschool.org/pages/International_Polytechnic_High/News/iPoly_Named_California_Disting" class="image"><img src="images/homeside5.jpg" alt="" /></a>
+                                    </section>
+                                </div>
+                                <div class="2u">
+                                    <section>
+                                    <a href="http://lacorop.org/" class="image" target="_blank"><img src="images/homeside6.jpg" alt="" /></a>
                                     </section>
                                 </div>
                             </div>
                         </div>
 						<ul class="links">
-							<li>&copy; iPoly High School. All rights reserved</li>
+							<li>&copy; <? echo date("Y"); ?> iPoly High School. All rights reserved</li>
 							<? /*
                             <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
 							*/
