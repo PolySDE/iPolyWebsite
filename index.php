@@ -38,6 +38,10 @@ if($query = $db->prepare("SELECT * FROM `pages`")){
 		$pagefound = true;
 		include_once("inc/left.inc.php");
 	}
+	if($page=="admin"){
+		$pagefound = true;
+		include_once("inc/admin.inc.php");
+	}
 	if($pagefound == false){
 		include_once("inc/home.inc.php");
 	}
