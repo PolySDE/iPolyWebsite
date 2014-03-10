@@ -11,6 +11,7 @@
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<meta name="viewport" content="width=1040" />
+        <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
 		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
         <?
         //<link rel="stylesheet" href="js/jquery.fancybox.css" type="text/css" media="screen" />
@@ -62,16 +63,24 @@
 			<div id="header-wrapper">
 				<!-- Header -->
 					<div id="header" class="container">
+                    <?
+					$page = $_GET['p'];
+					if($page=="home" || $page == ""){
+					?>
 						<!-- Logo -->
-							<h1 id="logo"><a href="?p=home" class="disabled"><img src="images/IPoly_logo.svg" style="width:auto; height:200px; margin-bottom:20px; margin-top:0px"><br>iPoly High School</a></h1>
-							<p>Where Common Core meets Project-Based Learning...</p>
+							<h1 id="logo"><a href="?p=home" class="disabled"><img src="images/IPoly_logo.svg" style="width:auto; height:150px; margin-bottom:20px; margin-top:0px"><br><div style="text-transform:none;">IPOLY HIGH SCHOOL</div></a></h1>
+							<p>Welcome to the new site of iPoly high school. This site is currently under construction.<br>To see the current site please visit us at <a href="http://ipolyhighschool.org">iPolyHighSchool.org</a>.</p>
 						<!-- Nav -->
+                        <?
+					}
+					?>
 							<nav id="nav">
 								<ul>
 									<li><a class="fa fa-home" href="?p=home"><span>Home</span></a></li>
 									<li><a href="" class="fa fa-info"><span>About Us</span></a>
 										<ul>
 											<li><a href="?p=about_pm">Principal's Message</a></li>
+                                            <li><a href="?p=contact_calendar">Calendar</a></li>
 											<li><a href="?p=about_apg">Assistant Principal's Greeting</a></li>
 											<li><a href="?p=about_mission">School Mission</a></li>
                                             <li><a href="?p=about_profile">School Profile</a></li>
@@ -82,6 +91,9 @@
                                             <li><a href="?p=about_faq">Assesment FAQs</a></li>
                                             <li><a href="?p=about_ptsa">PTSA</a></li>
                                             <li><a href="?p=about_support">Support iPoly</a></li>
+                                            <li><a href="?p=contact_map">iPoly High School Map</a></li>
+                                            <li><a href="?p=contact_info">Contact Information</a></li>
+
 										</ul>
 									</li>
 									<li>
@@ -92,6 +104,14 @@
                                             <li><a href="?p=academic_service">Community Service Learning</a></li>
                                             <li><a href="images/ESLRS.pdf">Expected School-wide Learning Results</a></li>
                                             <li><a href="?p=academic_graduation">Graduation Requirements</a></li>
+                                        <li>
+                                    		<a class="" href=""><div style="float:left;">Alumni</div><i class="fa fa-arrow-right" style="font-size:12px; float:right;"></i><div style="clear:both;"></div></a>
+                                            <ul>
+                                                <li><a href="?p=alumni_general">General Information and Announcements</a></li>
+                                                <li><a href="?p=alumni_classes">Graduating Classes</a></li>
+                                                <li><a href="?p=alumni_contact">Alumni Contact</a></li>
+                                            </ul>
+                                        </li>
                                         </ul>
                                     </li>
 									<li>
@@ -114,6 +134,7 @@
                                     	<a class="fa fa-user" href=""><span>Admissions</span></a>
                                     	<ul>
                                         	<li><a href="?p=admissions_process">Admissions Process and Information</a></li>
+                                            <li><a href="http://ipolyregister.lacoemis.org/" target="_blank">Apply Online</a></li>
                                             <li><a href="?p=admissions_faq">Admissions FAQ</a></li>
                                             <li>
                                             	<a href=""><div style="float:left;">Applications</div><i class="fa fa-arrow-right" style="font-size:12px; float:right;"></i><div style="clear:both;"></div></a>
@@ -132,6 +153,7 @@
                                             	<a href=""><div style="float:left;">9th Grade</div><i class="fa fa-arrow-right" style="font-size:12px; float:right;"></i><div style="clear:both;"></div></a>
                                                 <ul>
                                                 	<li><a href="images/9th_Grade_Block_Schedule_2013-14.pdf" target="_blank">9th Grade Student Schedule</a></li>
+                                                    <li><a href="http://ipoly9.blogspot.com/" target="_blank">9th Grade Blog</a></li>
                                                     <li><a href="?p=9th_english">English</a></li>
                                                     <li><a href="?p=9th_math">Math</a></li>
                                                     <li><a href="?p=9th_science">Science</a></li>
@@ -162,6 +184,7 @@
                                             	<a href=""><div style="float:left;">12th Grade</div><i class="fa fa-arrow-right" style="font-size:12px; float:right;"></i><div style="clear:both;"></div></a>
                                                 <ul>
                                                 	<li><a href="images/12th_Grade_Block_Schedule_2013-14.pdf" target="_blank">12th Grade Student Schedule</a></li>
+                                                    <li><a href="http://ipolyclassof2014.blogspot.com" target="_blank">12th Grade Blog</a></li>
                                                     <li><a href="?p=12th_english">English</a></li>
                                                     <li><a href="?p=12th_math">Math</a></li>
                                                     <li><a href="?p=12th_science">Science</a></li>
@@ -170,10 +193,10 @@
                                                 </ul>
                                             </li>                                    
                                             <li><a href="?p=fl">Foreign Language</a></li>
-                                            <li><a href="?p=sped">Special Education</a></li>
                                             <li><a href="?p=pe">PE/Health</a></li>
+                                            <li><a href="?p=sped">Special Education</a></li>
+                                            <li><a href="?p=rop">ROP</a></li>
                                             <li><a href="?p=counseling">Counseling Center</a></li>
-                                            <li><a href="?p=admissions">Admissions</a></li>
                                         </ul>
                                     </li>
                                     <li>
@@ -186,23 +209,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                    	<a class="fa fa-group" href=""><span>Alumni</span></a>
-                                        <ul>
-                                        	<li><a href="?p=alumni_general">General Information and Announcements</a></li>
-                                            <li><a href="?p=alumni_classes">Graduating Classes</a></li>
-                                            <li><a href="?p=alumni_contact">Alumni Contact</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                    	<a class="fa fa-envelope" href=""><span>Contact</span></a>
-                                        <ul>
-                                        	<li><a href="?p=contact_info">Contact Information</a></li>
-                                            <li><a href="?p=contact_calendar">Calendar</a></li>
-                                            <li><a href="?p=contact_map">iPoly High School Map</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                    	<a class="icon-e" href=""><span>AERIES</span></a>
+                                    	<a class="icon-e" href=""><span class="fa">Aeries Portal</span></a>
                                         <ul>
                                             <li><a href="https://studentinfo.lacoemis.org/ipolyparent" target="_blank">Parent</a></li>
                                             <li><a href="https://studentinfo.lacoemis.org/ipolyparent" target="_blank">Student</a></li>
