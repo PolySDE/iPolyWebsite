@@ -34,7 +34,7 @@
 	$(document).ready(
 		function()
 		{
-			$('#redactor').redactor();
+			$('#redactoreditor').redactor();
 		}
 	);
 	</script>
