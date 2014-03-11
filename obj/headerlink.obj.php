@@ -94,6 +94,7 @@ class PolyHeaderLinkChild {
 		echo '<li><a href="'.$this->url.'">'.$this->text.'</a></li>';
 	}
 }
+/*
 $home = new PolyHeaderInit("fa fa-home", "?p=home", "<span>Home</span>");
 $about = new PolyHeaderInit("fa fa-info", "", "<span>About Us</span>",
 	new PolyHeaderLinkParent(
@@ -253,7 +254,7 @@ $aeries = new PolyHeaderInit("icon-e", "", "<span>Aeries Portal</span>",
 	)
 );
 
-/*
+
 $header = new PolyHeader(array($home, $about, $academic, $pbl, $admissions, $departments, $parent, $aeries));
 $header->paint();
 echo "<br><br>";
