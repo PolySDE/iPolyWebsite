@@ -117,17 +117,17 @@ class PolyPage {
                                             <article class="is-post">
                                             <form action="func/edit.func.php" method="post">
                                             <input type="hidden" name="page" value="<? echo $_GET['p'];?>" />
-                                            <input type="hidden" name="sidebarContent" value="<? echo $this->pageSidebarContent;?>" />
+                                            <input type="hidden" name="sidebarContent" value="<? echo base64_encode($this->pageSidebarContent); ?>" />
                                             <select name="pageType" style="width:auto;">
                                             	<option value="no-sidebar" <? if($this->pageType=="no-sidebar"){ echo "selected"; }?>>No Sidebar</option>
                                                 <option value="left-sidebar" <? if($this->pageType=="left-sidebar"){ echo "selected"; }?>>Left Sidebar</option>
                                             </select>
                                             <input type="submit" name="submit" class="button button-icon" value="Save" />
                                                 <header>
-                                                    <h2 style="display:inline;"><textarea id="redactor1" name="pageTitle" rows="2"><? echo $this->pageTitle?></textarea></h2>
+                                                    <h2 style="display:inline;"><textarea class="tinymce" id="redactor1" name="pageTitle" rows="2"><? echo $this->pageTitle?></textarea></h2>
                                                     <br />
                                                 </header>
-                                                <textarea id="redactor2" name="pageContent">
+                                                <textarea class="tinymce" id="redactor2" name="pageContent">
                                                                                                 <?
 												//<span class="image image-full"><img src="images/pic04.jpg" alt="" /></span>
                                                 echo $this->pageContent;
@@ -136,7 +136,7 @@ class PolyPage {
                                                 <?
 												if($this->pageType=="left-sidebar"){
 													?>
-                                                    <textarea id="redactor3" name="sidebarContent">
+                                                    <textarea class="tinymce" id="redactor3" name="sidebarContent">
                                                     <? echo $this->pageSidebarContent; ?>
                                                     </textarea>
                                                     <?
@@ -169,11 +169,11 @@ class PolyPage {
                                                 <option value="left-sidebar" <? if($this->pageType=="left-sidebar"){ echo "selected"; }?>>Left Sidebar</option>
                                             </select>
                                                 <header>
-                                                    <h2 style="display:inline;"><textarea id="redactor1" name="pageTitle" rows="2"><? echo $this->pageTitle?></textarea></h2>
+                                                    <h2 style="display:inline;"><textarea class="tinymce" id="redactor1" name="pageTitle" rows="2"><? echo $this->pageTitle?></textarea></h2>
                                                     <input type="submit" name="submit" class="button button-icon" value="Save" />
                                                     <br />
                                                 </header>
-                                                <textarea id="redactor2" style="height:auto;" name="pageContent">
+                                                <textarea class="tinymce" id="redactor2" style="height:auto;" name="pageContent">
                                                                                                 <?
 												//<span class="image image-full"><img src="images/pic04.jpg" alt="" /></span>
                                                 echo $this->pageContent;
@@ -183,7 +183,7 @@ class PolyPage {
                                                 <?
 												if($this->pageType=="left-sidebar"){
 													?>
-                                                    <textarea id="redactor3" name="sidebarContent">
+                                                    <textarea class="tinymce" id="redactor3" name="sidebarContent">
                                                     <? echo $this->pageSidebarContent; ?>
                                                     </textarea>
                                                     <input type="submit" name="submit" class="button button-icon" value="Save"/>

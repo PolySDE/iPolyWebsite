@@ -34,12 +34,14 @@
 	$(document).ready(
 		function()
 		{
+			/*
 			$('#redactor').redactor();
 			$('#redactor1').redactor();
 			$('#redactor2').redactor();
 			$('#redactor3').redactor();
 			$('#redactor4').redactor();
 			$('#redactor5').redactor();
+			*/
 		}
 	);
 	</script>
