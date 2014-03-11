@@ -24,6 +24,20 @@
 		<script src="js/skel-panels.min.js"></script>
         <script src="js/unslider.js"></script>
         <script src="js/tinymce/tinymce.min.js"></script>
+
+
+	<!-- Redactor is here -->
+	<link rel="stylesheet" href="js/redactor.css" />
+	<script src="js/redactor.min.js"></script>
+
+	<script type="text/javascript">
+	$(document).ready(
+		function()
+		{
+			$('#redactor').redactor();
+		}
+	);
+	</script>
 		<script>
                 tinymce.init({
 					selector:'textarea.tinymce',
