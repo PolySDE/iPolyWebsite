@@ -1,8 +1,11 @@
 <?
 session_start();
+//error_reporting(E_ALL);
+//ini_set("display_errors", 1);
 include_once("func/config.func.php");
 include_once("obj/polysite.obj.php");
 include_once("obj/polypage.obj.php");
+include_once("obj/headerlink.obj.php");
 $thissite = new PolySite();
 include_once("inc/header.inc.php");
 if(isset($_GET['p'])){
