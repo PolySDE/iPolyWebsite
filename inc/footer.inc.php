@@ -80,8 +80,8 @@
 									<div class="row">
 										<ul class="icons 8u">
 											<li class="fa fa-home">
-                                            	3851 W. Temple Avenue,<br />
-                                                Pomona, CA 91768-2537
+                                            	3851 W. Temple Avenue<br />
+                                                Pomona, CA 91768-2557
 											</li>
 											<li class="fa fa-phone">
 												 Phone: (909) 839-2320<br />
