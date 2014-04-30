@@ -244,10 +244,12 @@ $parent = new PolyHeaderInit("fa fa-folder-open", "", "<span>Parent Resources</s
 	)
 );
 
-$aeries = new PolyHeaderInit("icon-e", "", "<span>Aeries Portal</span>",
+$aeries = new PolyHeaderInit("icon-e", "", "<span>Portals</span>",
 	new PolyHeaderLinkParent(
 		array(
-			new PolyHeaderLinkChild("https://studentinfo.lacoemis.org/ipolyparent", "Parent/Student", "_blank"),
+			new PolyHeaderLinkChild("https://studentinfo.lacoemis.org/ipolyparent", "Parent", "_blank"),
+			new PolyHeaderLinkChild("https://studentinfo.lacoemis.org/ipolyparent", "Student", "_blank"),
+			new PolyHeaderLinkChild("http://ipolyregister.lacoemis.org", "New Student Enrollment", "_blank"),
 			new PolyHeaderLinkChild("https://studentinfo.lacoemis.org/ipolyteacher", "Teacher", "_blank"),
 			new PolyHeaderLinkChild("https://studentinfo.lacoemis.org/aeries.net", "Staff", "_blank")
 		)
@@ -256,7 +258,7 @@ $aeries = new PolyHeaderInit("icon-e", "", "<span>Aeries Portal</span>",
 
 
 $header = new PolyHeader(array($home, $about, $academic, $pbl, $admissions, $departments, $parent, $aeries));
-$header->paint();
+//$header->paint();
 echo "<br><br>";
 echo $header->serializeThis();
 */
