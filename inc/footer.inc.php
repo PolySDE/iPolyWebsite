@@ -151,7 +151,7 @@
                             </div>
                         </div>
 						<ul class="links">
-							<li>&copy; <? echo date("Y"); ?> iPoly High School. All rights reserved</li>
+							<li>&copy; <? echo date("Y"); ?> iPoly High School. All rights reserved.</li>
 							<? /*
                             <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
 							*/
