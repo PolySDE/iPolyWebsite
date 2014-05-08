@@ -32,41 +32,22 @@
 						</header>
                         */
                         ?>
-						<div class="row">
-							<div class="4u">
+						<div align="center" class="row">
+							<div align="center" class="4u">
 								<!-- Feature -->
-									<section>
-										<a href="?p=about_mission" class="image image-center"><img src="images/mission_of_ipoly_home_page.jpg" alt=""/></a>
-										<header>
-											<h3>The Mission of iPoly</h3>
-										</header>
-                                        <p>
-                                        </p>
-									</section>
+									<img src="images/homeslider/banner001.jpg" />
 
 							</div>
 							<div class="4u">
 
 								<!-- Feature -->
-									<section>
-										<a href="?p=pbl_what" class="image image-center"><img src="images/projectbasedlearning.jpg" alt="" /></a>
-										<header>
-											<h3>Project-Based Learning</h3>
-										</header>
-										<p>The foundation of iPoly is our Project-Based curriculum.</p>
-									</section>
+									
 									
 							</div>
 							<div class="4u">
 
 								<!-- Feature -->
-									<section>
-										<a href="?p=about_building" class="image image-center"><img src="images/homepage3.gif" alt="" /></a>
-										<header>
-											<h3>New Building</h3>
-										</header>
-										<p>Take a virtual tour of our new campus!</p>
-									</section>
+									
 
 							</div>
 						</div>
@@ -90,7 +71,11 @@
 											<header>
 												<h2 style="display:inline;"><a href="?p=contact_calendar">Announcements</a></h2>
 											</header>
-<p><iframe style="border: 0;" src="https://www.google.com/calendar/embed?src=3pgodnitgpga0dl9368v4r0gck%40group.calendar.google.com&amp;ctz=America/Los_Angeles" width="80%" height="600px" frameborder="0" scrolling="no"></iframe></p>
+<p>
+
+<iframe src="https://www.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=ipolyhsmainoffice%40gmail.com&amp;color=%232952A3&amp;ctz=America%2FLos_Angeles" style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+</p>
 										</article>
 								
 								</div>
@@ -104,24 +89,21 @@
 													<!-- Excerpt -->
 														<article class="is-excerpt">
 															<header>
-																<span class="date">Upcoming Events</span>
-																<h3><a href="#">iPoly Information Session for Potential Students</a></h3>
+																<span class="date">This Week At IPOLY HS</span>
+																<h3><a href="#">AP Calculus Testing</a></h3>
 															</header>
-															<p>1:45-3:00pm</p>
+															<p>8:00am - 12:00pm</p>
                                                             <header>
-																<h3><a href="#">iPoly Information Session for Potential Students</a></h3>
+																<h3><a href="#">Grad Night Cut Off</a></h3>
 															</header>
-															<p>1:45-3:00pm</p>
+															<p>Seniors</p>
 															<header>
-																<h3><a href="#">iPoly Information Session for Potential Students</a></h3>
+																<h3><a href="#">Exit Interviews</a></h3>
 															</header>
-															<p>8:15-9:30am</p>
-                                                            	<h3><a href="#">Pep Rally - Small Gym, Cal Poly</a></h3>
-															<p>11:00am - 12:30pm</p>
-                                                            <header>
-																<h3><a href="#">Winter Formal - Meridian Club, Fullerton</a></h3>
-															</header>
-															<p>6:00pm - 11:00pm</p>
+															<p>Seniors</p>
+                                                            	<h3><a href="#">Drama Production</a></h3>
+															<p>Drama Elective</p>
+                                                            
 														</article>
 												</li>								
                                              </ul>

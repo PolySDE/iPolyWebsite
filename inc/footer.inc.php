@@ -88,7 +88,7 @@
                                                  Fax: (909) 839-2326
 											</li>
 											<li class="fa fa-envelope">
-												<a href="mailto:ipoly@email.com">iPoly@email.com</a>
+												<a href="mailto:ipolyhsmainoffice@gmail.com">iPoly Main Office</a>
 											</li>
 										</ul>
                                         <? /*
@@ -120,7 +120,7 @@
                             <div class="row">
                                 <div class="2u">
                                     <section>
-                                    <a href="?p=about_support" class="image"><img src="images/homeside1.gif" alt=""/></a>
+                                    <a href="?p=about_support" class="image"><img src="images/homeside1.gif" alt="Support IPoly"/></a>Support IPoly
                                     </section>
                                 </div>
                                 <div class="2u">
@@ -140,7 +140,7 @@
                                 </div>
                                 <div class="2u">
                                     <section>
-                                    <a href="http://www.ipolyhighschool.org/pages/International_Polytechnic_High/News/iPoly_Named_California_Disting" class="image"><img src="images/homeside5.jpg" alt="" /></a>
+                                    <a href="http://www.cde.ca.gov/nr/ne/yr13/yr13rel45.asp" class="image"><img src="images/homeside5.jpg" alt="" /></a>
                                     </section>
                                 </div>
                                 <div class="2u">
