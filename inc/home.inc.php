@@ -79,37 +79,10 @@
 										</article>
 								
 								</div>
-								
-							<!-- Sidebar -->
-								<div id="sidebar" class="4u">
-									<!-- Excerpts -->
-										<section>
-											<ul class="divided">
-                                            	<li>
-													<!-- Excerpt -->
-														<article class="is-excerpt">
-															<header>
-																<span class="date">This Week At IPOLY HS</span>
-																<h3><a href="#">AP Calculus Testing</a></h3>
-															</header>
-															<p>8:00am - 12:00pm</p>
-                                                            <header>
-																<h3><a href="#">Grad Night Cut Off</a></h3>
-															</header>
-															<p>Seniors</p>
-															<header>
-																<h3><a href="#">Exit Interviews</a></h3>
-															</header>
-															<p>Seniors</p>
-                                                            	<h3><a href="#">Drama Production</a></h3>
-															<p>Drama Elective</p>
-                                                            
-														</article>
-												</li>								
-                                             </ul>
-										</section>
-								</div>
-
+								<?
+								$sider = new PolySider();
+								$sider->paint();
+								?>
 						</div>
 					</div>
 

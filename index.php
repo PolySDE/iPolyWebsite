@@ -46,6 +46,7 @@ if($query = $db->prepare("SELECT * FROM `pages`")){
 		include_once("inc/admin.inc.php");
 	}
 	if($pagefound == false){
+		include_once("obj/homesider.obj.php");
 		include_once("inc/home.inc.php");
 	}
 }
