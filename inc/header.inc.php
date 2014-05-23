@@ -112,7 +112,9 @@
 									$object = unserialize(base64_decode($obj['value']));
 									$object->paint();
 								}
+								$queryh->close();
 							}
+							$dbh->close();
 							?>
 							</nav>
 
