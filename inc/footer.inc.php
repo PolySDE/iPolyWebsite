@@ -1,10 +1,10 @@
 		<!-- Footer Wrapper -->
-			<div id="footer-wrapper">
+			<div id="footer-wrapper" style="padding-bottom: 20px; padding-top:40px;">
 
 				<!-- Footer -->
 					<div id="footer" class="container">
 						<header>
-							<h2>Questions or comments? <strong>Get in touch:</strong></h2>
+							<h2 style="margin-bottom:0px;">Questions or comments? <strong>Get in touch:</strong></h2>
 						</header>
 						<div class="row">
 							<div class="4u">
@@ -28,6 +28,7 @@
                                     </div>
                                     <?
 								} else {
+									/*
 								?>
 									<form method="post" action="func/login.func.php">
                                     <div class="row half">
@@ -47,7 +48,9 @@
                                     </div>
                                     </form>
                                     <?
+								*/
 								}
+								
 								?>
                                 <? /*
 									<form method="post" action="#">
@@ -115,7 +118,7 @@
 					</div>
 
 				<!-- Copyright -->
-					<div id="copyright" class="container">
+					<div id="copyright" class="container" style="margin-top:40px;">
                     	<div style="width:auto; margin-left:auto; margin-right:auto;">
                             <div class="row">
                                 <div class="2u">
