@@ -71,7 +71,9 @@ class PolySider {
                                                         ?>
                                                         <header style="margin-bottom:0px; margin-top:0px; padding-left:0px;">
                                                             <h3 style="margin-bottom:0px;"><a href=""><? echo $this->events[$x]->title; ?></a></h3>
-                                                            <h3 style="margin-bottom:0px; padding-left:280px;"><a href="func/homesider.edit.php?delete=1&eid=<? echo $x;?>" style="color:#F00;">DELETE</a></h3>
+                                                            <?  if(isset($_SESSION['is_admin'])){ ?>
+                                                            	<h3 style="margin-bottom:0px; padding-left:280px;"><a href="func/homesider.edit.php?delete=1&eid=<? echo $x;?>" style="color:#F00;">DELETE</a></h3>
+                                                            <? } ?>
                                                         </header>
                                                         <p style="margin-bottom:10px; margin-top:0px;padding-left:30px;"><? echo $this->events[$x]->content; ?></p>
                                                         <?
