@@ -10,7 +10,7 @@ if($_POST['submit']=="Save" && isset($_SESSION['is_admin'])){
 	for($x = 0; $x < count($oldSider->getEvents()); $x++){
 		$events[$x] = new PolyEvent($_POST[$x.'title'], $_POST[$x.'text']);
 	}
-	if(strlen($_POST['newtitle'])>0 && strlen($_POST['newtext'])>0){
+	if(strlen($_POST['newtitle'])>0){
 		$newtitle = $_POST['newtitle'];
 		$newtext = $_POST['newtext'];
 		$newevent = new PolyEvent($newtitle, $newtext);
