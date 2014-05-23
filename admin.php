@@ -2,6 +2,8 @@
 session_start();
 if(isset($_GET['p'])){
 	header("Location: /?p=".$_GET['p']);
+} else if(isset($_SESSION['is_admin'])){
+	header("Location: /?p=home");
 } else {
 	include_once("func/config.func.php");
 	include_once("obj/polysite.obj.php");
