@@ -110,7 +110,11 @@
 								$queryh->bind_result($obj['id'], $obj['value']);
 								while($queryh->fetch()){
 									$object = unserialize(base64_decode($obj['value']));
-									$object->paint();
+									if(isset($_SESSION['is_admin'])){
+										$object->paintAdmin();
+									} else {
+										$object->paint();
+									}
 								}
 								$queryh->close();
 							}

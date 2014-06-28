@@ -15,6 +15,16 @@ class PolyHeader {
 		//echo htmlspecialchars('</ul>');
 		echo "</ul>";
 	}
+	function paintAdmin(){
+		//echo htmlspecialchars('<ul>')."<br>";
+		echo "<ul>";
+		for($x = 0; $x < count($this->childInits); $x++){
+			$this->childInits[$x]->paint();
+		}
+		//echo htmlspecialchars('</ul>');
+		echo "<li><a class='fa fa-cog' href='?p=admin'><span>Admin Panel</span></a>";
+		echo "</ul>";
+	}
 	function serializeThis(){
 		return base64_encode(serialize($this));
 	}
