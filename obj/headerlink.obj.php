@@ -31,7 +31,9 @@ class PolyHeader {
 	function getChildren(){
 		return $this->childInits;
 	}
-		
+	function setChildren($children){
+		$this->childInits = $children;
+	}
 }
 class PolyHeaderInit {
 	private $icon, $url, $text, $parentObject;
@@ -64,6 +66,18 @@ class PolyHeaderInit {
 	function getParent(){
 		return $this->parentObject;
 	}
+	function setIcon($icon){
+		$this->icon = $icon;
+	}
+	function setURL($url){
+		$this->url = $url;
+	}
+	function setText($text){
+		$this->text = $text;
+	}
+	function setParent($parent){
+		$this->parentObject = $parent;
+	}
 }
 class PolyHeaderLinkParent {
 	private $children;
@@ -81,6 +95,9 @@ class PolyHeaderLinkParent {
 	}
 	function getChildren(){
 		return $this->children;
+	}
+	function setChildren($children){
+		$this->children = $children;
 	}
 }
 class PolyHeaderExpandChild {
@@ -104,6 +121,12 @@ class PolyHeaderExpandChild {
 	function getText(){
 		return $this->text;
 	}
+	function setParent($parent){
+		$this->childrenP = $parent;
+	}
+	function setText($text){
+		$this->text = $text;
+	}
 }
 class PolyHeaderLinkChild {
 	private $url, $text, $target;
@@ -123,6 +146,12 @@ class PolyHeaderLinkChild {
 	}
 	function setText($text){
 		$this->text = $text;
+	}
+	function getTarget(){
+		return $this->target;
+	}
+	function setTarget($target){
+		$this->target = $target;
 	}
 	function paint(){
 		//echo htmlspecialchars('<li><a href="'.$this->url.'">'.$this->text.'</a></li>')."<br>";
