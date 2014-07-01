@@ -5,7 +5,7 @@
 					<div id="main" class="container">
 						<div class="row">
 							<!-- Sidebar -->
-								<div id="sidebar" class="4u">
+								<div id="sidebar" class="3u">
 								
 									<!-- Excerpts -->
 										<section>
@@ -38,7 +38,7 @@
 										</section>
 								</div>
 							<!-- Content -->
-								<div id="content" class="8u skel-cell-important">
+								<div id="content" class="9u skel-cell-important">
 									<!-- Post -->
                                     <?
 									if(isset($_GET['ap'])){
@@ -82,17 +82,74 @@
 											$headerChildren = $object->getChildren();
 											
 											?>
-                                            <table>
-                                                <tr>
-                                                	<td>Parent</td>
-                                                    <td>Child</td>
-                                                </tr>
+                                            <div class="row 12u">
+                                            	<div class="row 12u">
+                                                	<div class="4u">
+                                                    	Parent
+                                                    </div>
+                                                    <div class="8u">
+                                                    	Child
+                                                    </div>
+                                                </div>
                                                 <?
 												for($x = 0; $x < count($headerChildren); $x++){
-													
+													$thisHeaderInit = $headerChildren[$x];
+													?>
+                                                <div class="row 12u">
+                                                	<div class="4u" style="border: 1px solid grey; padding-top:0; margin-top:5px;">
+                                                        Text: <? echo $thisHeaderInit->getText(); ?><br />
+                                                        Icon: <? echo $thisHeaderInit->getIcon()." <span class='".$thisHeaderInit->getIcon()."'></span>"; ?><br />
+                                                        URL: <? echo $thisHeaderInit->getURL(); ?>
+                                                    </div>
+                                                    <div class="8u" style="padding-top:0;">
+                                                    	<?
+														if($thisHeaderInit->getParent()!=null){
+															$thisParentsChildren = $thisHeaderInit->getParent()->getChildren();
+															for($y = 0; $y < count($thisParentsChildren); $y++){
+																?>
+                                                                <div class="row 12u" style=" padding-top:0;">
+                                                                	<?
+																	if(get_class($thisParentsChildren[$y])=="PolyHeaderLinkChild"){
+																		?>
+                                                                        <div class="12u" style="border: 1px solid grey; padding-top:0; margin-top:5px;">
+                                                                            <?
+																			echo "Text: ".$thisParentsChildren[$y]->getText()."<br>";
+																			echo "URL: ".$thisParentsChildren[$y]->getURL()."<br>";
+																			echo "Target: ".$thisParentsChildren[$y]->getTarget();
+																			?>
+                                                                        </div>
+                                                                        <?
+																	} else {
+																		?>
+                                                                        <div class="4u" style="border: 1px solid grey; padding-top:0;">
+                                                                        	<? echo $thisParentsChildren[$y]->getText(); ?>
+                                                                        </div>
+                                                                        <div class="8u" style="border: 1px solid grey; padding-top:0;">
+                                                                        	<?
+																			$childparentchild = $thisParentsChildren[$y]->getParent()->getChildren();
+																			?>
+                                                                            <?
+																			for($z = 0; $z < count($childparentchild); $z++){
+																				echo "Text: ".$childparentchild[$z]->getText()."<br>";
+																				echo "URL: ".$childparentchild[$z]->getURL()."<br>";
+																				echo "Target: ".$childparentchild[$z]->getTarget();
+																			}
+																			?>
+                                                                        </div>
+                                                                        <?
+																	}
+																	?>
+                                                                </div>
+                                                                <?
+															}
+														}
+														?>
+                                                    </div>
+                                                </div>
+                                                    <?
 												}
 												?>
-                                            </table>
+                                            </div>
                                             </p>
                                         </article>
                                         <?
