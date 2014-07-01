@@ -41,7 +41,7 @@ if($query = $db->prepare("SELECT * FROM `pages`")){
 		$pagefound = true;
 		include_once("inc/left.inc.php");
 	}
-	if($page=="admin"){
+	if($page=="admin" && isset($_SESSION['is_admin'])){
 		$pagefound = true;
 		include_once("inc/admin.inc.php");
 	}
