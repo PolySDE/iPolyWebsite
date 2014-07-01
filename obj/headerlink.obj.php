@@ -28,6 +28,10 @@ class PolyHeader {
 	function serializeThis(){
 		return base64_encode(serialize($this));
 	}
+	function getChildren(){
+		return $this->childInits;
+	}
+		
 }
 class PolyHeaderInit {
 	private $icon, $url, $text, $parentObject;
@@ -48,6 +52,18 @@ class PolyHeaderInit {
 		//echo htmlspecialchars('</li>')."<br>";
 		echo "</li>";
 	}
+	function getIcon(){
+		return $this->icon;
+	}
+	function getURL(){
+		return $this->url;
+	}
+	function getText(){
+		return $this->text;
+	}
+	function getParent(){
+		return $this->parentObject;
+	}
 }
 class PolyHeaderLinkParent {
 	private $children;
@@ -62,6 +78,9 @@ class PolyHeaderLinkParent {
 		}
 		//echo htmlspecialchars('</ul>')."<br>";
 		echo "</ul>";
+	}
+	function getChildren(){
+		return $this->children;
 	}
 }
 class PolyHeaderExpandChild {
@@ -78,6 +97,12 @@ class PolyHeaderExpandChild {
 		$this->childrenP->paint();
 		//echo htmlspecialchars('</li>')."<br>";
 		echo '</li>';
+	}
+	function getParent(){
+		return $this->childrenP;
+	}
+	function getText(){
+		return $this->text;
 	}
 }
 class PolyHeaderLinkChild {
