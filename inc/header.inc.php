@@ -24,8 +24,7 @@
 		<script src="js/skel-panels.min.js"></script>
         <script src="js/unslider.js"></script>
         <script src="js/tinymce/tinymce.min.js"></script>
-
-
+		<script src="js/overlay.js"></script>
 	<!-- Redactor is here -->
 	<link rel="stylesheet" href="js/redactor.css" />
 	<script src="js/redactor.min.js"></script>
@@ -72,7 +71,23 @@
 			});
 		});
 		</script>
-		<noscript>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$("a[rel]").overlay({fixed:false});
+		});
+		</script>
+        <?
+		if(isset($_GET['st'])){
+			$st = $_GET['st'];
+			?>
+            <script type="text/javascript">
+				document.getElementById('<? echo $st; ?>').scrollIntoView(true);
+			</script>
+            <?
+		}
+		?>
+        
+        <noscript>
 			<link rel="stylesheet" href="css/skel-noscript.css" />
 			<link rel="stylesheet" href="css/style.css" />
 			<link rel="stylesheet" href="css/style-desktop.css" />
