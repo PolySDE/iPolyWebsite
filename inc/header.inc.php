@@ -73,7 +73,7 @@
 		</script>
 		<script type="text/javascript">
 		$(document).ready(function() {
-			$("a[rel]").overlay({fixed:false});
+			$("a[rel]").overlay({left: 'center', fixed:false});
 		});
 		</script>
         <?
