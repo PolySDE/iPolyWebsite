@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
  ini_set("display_errors", 1);
 class PolyHeader {
-	private $childInits;
+	public $childInits;
 	function __construct($childInits = array()){
 		$this->childInits = $childInits;
 	}
@@ -36,7 +36,7 @@ class PolyHeader {
 	}
 }
 class PolyHeaderInit {
-	private $icon, $url, $text, $parentObject;
+	public $icon, $url, $text, $parentObject;
 	function __construct($icon, $url, $text, $parent = null){
 		$this->icon		= $icon;
 		$this->url		= $url;
@@ -80,7 +80,7 @@ class PolyHeaderInit {
 	}
 }
 class PolyHeaderLinkParent {
-	private $children;
+	public $children;
 	function __construct($children = array()){
 		$this->children = $children;
 	}
@@ -101,7 +101,7 @@ class PolyHeaderLinkParent {
 	}
 }
 class PolyHeaderExpandChild {
-	private $text, $childrenP;
+	public $text, $childrenP;
 	function __construct($text, $childrenP){
 		$this->text = $text;
 		$this->childrenP = $childrenP;
@@ -129,7 +129,7 @@ class PolyHeaderExpandChild {
 	}
 }
 class PolyHeaderLinkChild {
-	private $url, $text, $target;
+	public $url, $text, $target;
 	function __construct($url, $text, $target = ""){
 		$this->url	= $url;
 		$this->text	= $text;
