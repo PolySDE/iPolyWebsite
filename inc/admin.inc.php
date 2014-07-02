@@ -3,7 +3,7 @@
  
     /* must be initially hidden */
     display:none;
- 
+ position:relative;
     /* place overlay on top of other elements */
     z-index:10000;
  
@@ -115,7 +115,82 @@
 											}
 											$dbh->close();
 											$headerChildren = $object->getChildren();
-											
+											for($x = 0; $x < count($headerChildren); $x++){
+												$thisHeaderInit = $headerChildren[$x];
+												?>
+                                                <div class="simple_overlay" id="headerinit<? echo $x; ?>">
+                                                    <p style="margin-left:10px;">
+                                                    <form style="margin-left:10px; margin-right:10px;" name="headerinit<? echo $x; ?>" action="func/header.edit.php" method="post">
+                                                        <input type="hidden" name="x" value="<? echo $x; ?>" />
+                                                        <h3 style="color:#FFF; margin-bottom:5px;">Text (Be sure to keep the &lt;span&gt; &amp; &lt;/span&gt;</h3>
+                                                        <input type="text" name="text" value="<? echo $thisHeaderInit->getText(); ?>" class="text"/>
+                                                        <h3 style="color:#FFF; margin-bottom:5px;">Icon</h3>
+                                                        <input type="text" name="icon" value="<? echo $thisHeaderInit->getIcon(); ?>" class="text" />
+                                                        <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
+                                                        <input type="text" name="url" value="<? echo $thisHeaderInit->getURL(); ?>" class="text" />
+                                                        <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['headerinit<? echo $x; ?>'].submit(); return false;">Save</a></center>
+                                                    </form>
+                                                    </p>
+                                                </div>
+                                                <?
+												if($thisHeaderInit->getParent()!=null){
+													$thisParentsChildren = $thisHeaderInit->getParent()->getChildren();
+													for($y = 0; $y < count($thisParentsChildren); $y++){
+														if(get_class($thisParentsChildren[$y])=="PolyHeaderLinkChild"){
+															//info
+															?>
+							<div class="simple_overlay" id="thisParentsChildrenx<? echo $x; ?>y<? echo $y; ?>">
+                                <p style="margin-left:10px;">
+                                <form style="margin-left:10px; margin-right:10px;" name="thisParentsChildrenx<? echo $x; ?>y<? echo $y; ?>" action="func/header.edit.php" method="post">
+                                <input type="hidden" name="x" value="<? echo $x; ?>" />
+                                    <input type="hidden" name="y" value="<? echo $y; ?>" />
+                                    <h3 style="color:#FFF; margin-bottom:5px;">Text</h3>
+                                    <input type="text" name="text" value="<? echo $thisParentsChildren[$y]->getText(); ?>" class="text"/>
+                                    <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
+                                    <input type="text" name="url" value="<? echo $thisParentsChildren[$y]->getURL(); ?>" class="text" />
+                                    <h3 style="color:#FFF; margin-bottom:5px;">Open In</h3>
+                                    <select name="target">
+                                    	<option value="" <? if($thisParentsChildren[$y]->getTarget()==""){ echo "selected"; }?>>Same Tab</option>
+                                        <option value="_blank" <? if($thisParentsChildren[$y]->getTarget()=="_blank"){ echo "selected"; }?>>New Tab</option>
+                                    </select>
+                                    <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['thisParentsChildrenx<? echo $x; ?>y<? echo $y; ?>'].submit(); return false;">Save</a></center>
+                                </form>
+                                </p>
+                            </div>
+                            <?
+														} else {
+															echo $thisParentsChildren[$y]->getText()."e";
+															$childparentchild = $thisParentsChildren[$y]->getParent()->getChildren();
+															?>
+															<?
+															for($z = 0; $z < count($childparentchild); $z++){
+
+							?>
+                            <div class="simple_overlay" id="childparentchildx<? echo $x; ?>y<? echo $y;?>z<? echo $z; ?>">
+                                <p style="margin-left:10px;">
+                                <form style="margin-left:10px; margin-right:10px;" name="childparentchildx<? echo $x; ?>y<? echo $y;?>z<? echo $z; ?>" action="func/header.edit.php" method="post">
+                                	<input type="hidden" name="x" value="<? echo $x; ?>" />
+                                	<input type="hidden" name="y" value="<? echo $y; ?>" />
+                                    <input type="hidden" name="z" value="<? echo $z; ?>" />
+                                    <h3 style="color:#FFF; margin-bottom:5px;">Text</h3>
+                                    <input type="text" name="text" value="<? echo $childparentchild[$z]->getText(); ?>" class="text"/>
+                                    <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
+                                    <input type="text" name="url" value="<? echo $childparentchild[$z]->getURL(); ?>" class="text" />
+                                    <h3 style="color:#FFF; margin-bottom:5px;">Open In</h3>
+                                    <select name="target">
+                                    	<option value="" <? if($childparentchild[$z]->getTarget()==""){ echo "selected"; }?>>Same Tab</option>
+                                        <option value="_blank" <? if($childparentchild[$z]->getTarget()=="_blank"){ echo "selected"; }?>>New Tab</option>
+                                    </select>
+                                    <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['childparentchildx<? echo $x; ?>y<? echo $y;?>z<? echo $z; ?>'].submit(); return false;">Save</a></center>
+                                </form>
+                                </p>
+                            </div>
+                            <?
+															}
+														}
+													}
+												}
+											}
 											?>
                                             <div class="row 12u">
                                             	<div class="row 12u">
@@ -136,20 +211,6 @@
                                                         Icon: <? echo $thisHeaderInit->getIcon()." <span class='".$thisHeaderInit->getIcon()."'></span>"; ?><br />
                                                         URL: <? echo $thisHeaderInit->getURL(); ?><br />
                                                         <a rel="#headerinit<? echo $x; ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Edit</a>
-                                                        <div class="simple_overlay" id="headerinit<? echo $x; ?>">
-                                                        	<p style="margin-left:10px;">
-                                                            <form style="margin-left:10px; margin-right:10px;" name="headerinit<? echo $x; ?>" action="func/header.edit.php" method="post">
-                                                            	<input type="hidden" name="x" value="<? echo $x; ?>" />
-                                                            	<h3 style="color:#FFF; margin-bottom:5px;">Text (Be sure to keep the &lt;span&gt; &amp; &lt;/span&gt;</h3>
-                                                                <input type="text" name="text" value="<? echo $thisHeaderInit->getText(); ?>" class="text"/>
-                                                                <h3 style="color:#FFF; margin-bottom:5px;">Icon</h3>
-                                                                <input type="text" name="icon" value="<? echo $thisHeaderInit->getIcon(); ?>" class="text" />
-                                                                <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
-                                                                <input type="text" name="url" value="<? echo $thisHeaderInit->getURL(); ?>" class="text" />
-                                                                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['headerinit<? echo $x; ?>'].submit(); return false;">Save</a></center>
-                                                            </form>
-                                                            </p>
-                                                        </div>
                                                     </div>
                                                     <div class="8u" style="padding-top:0;">
                                                     	<?
@@ -161,7 +222,7 @@
                                                                 	<?
 																	if(get_class($thisParentsChildren[$y])=="PolyHeaderLinkChild"){
 																		?>
-                                                                        <div class="12u" style="border: 1px solid grey; padding-top:0; margin-top:5px;" id="thisParentsChildrenst<? echo $y; ?>">
+                                                                        <div class="12u" style="border: 1px solid grey; padding-top:0; margin-top:5px;" id="thisParentsChildrenstx<? echo $x; ?>y<? echo $y; ?>">
                                                                             <?
 																			echo "Text: ".$thisParentsChildren[$y]->getText()."<br>";
 																			echo "URL: ".$thisParentsChildren[$y]->getURL()."<br>";
@@ -170,26 +231,8 @@
 																			} else {
 																				echo "Open in: Same tab";
 																			}
-																			
 																			?><br />
-                                                                            <a rel="#thisParentsChildren<? echo $y; ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Edit</a>
-                            <div class="simple_overlay" id="thisParentsChildren<? echo $y; ?>">
-                                <p style="margin-left:10px;">
-                                <form style="margin-left:10px; margin-right:10px;" name="thisParentsChildren<? echo $y; ?>" action="func/header.edit.php" method="post">
-                                    <input type="hidden" name="y" value="<? echo $y; ?>" />
-                                    <h3 style="color:#FFF; margin-bottom:5px;">Text (Be sure to keep the &lt;span&gt; &amp; &lt;/span&gt;</h3>
-                                    <input type="text" name="text" value="<? echo $thisParentsChildren[$y]->getText(); ?>" class="text"/>
-                                    <h3 style="color:#FFF; margin-bottom:5px;">Icon</h3>
-                                    <input type="text" name="url" value="<? echo $thisParentsChildren[$y]->getURL(); ?>" class="text" />
-                                    <h3 style="color:#FFF; margin-bottom:5px;">Open In</h3>
-                                    <select name="target">
-                                    	<option value="" <? if($thisParentsChildren[$y]->getTarget()==""){ echo "selected"; }?>>Same Tab</option>
-                                        <option value="_blank" <? if($thisParentsChildren[$y]->getTarget()=="_blank"){ echo "selected"; }?>>New Tab</option>
-                                    </select>
-                                    <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['thisParentsChildren<? echo $y; ?>'].submit(); return false;">Save</a></center>
-                                </form>
-                                </p>
-                            </div>
+                                                                            <a rel="#thisParentsChildrenx<? echo $x; ?>y<? echo $y; ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Edit</a>
                                                                         </div>
                                                                         <?
 																	} else {
@@ -204,10 +247,11 @@
                                                                             <?
 																			for($z = 0; $z < count($childparentchild); $z++){
 																				?>
-                                        <div class="row 12u" style="border: 1px solid grey; padding-top:0; margin-top:5px;" id="childparentchild<? echo $z; ?>">
+                                        <div class="row 12u" style="border: 1px solid grey; padding-top:0; margin-top:5px;" id="childparentchildstx<? echo $x; ?>y<? echo $y;?>z<? echo $z; ?>">
                                         	Text: <? echo $childparentchild[$z]->getText(); ?><br />
                                             URL: <? echo $childparentchild[$z]->getURL(); ?><br />
-                                            <? if($childparentchild[$z]->getTarget()=="_blank"){ echo "Open in: New tab"; } else { echo "Open in: Same tab";} ?>
+                                            <? if($childparentchild[$z]->getTarget()=="_blank"){ echo "Open in: New tab"; } else { echo "Open in: Same tab";} ?><br />
+                                            <a rel="#childparentchildx<? echo $x; ?>y<? echo $y;?>z<? echo $z; ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Edit</a>
                                         </div>
                                                                                 <?
 																			}
