@@ -1,3 +1,38 @@
+<style type="text/css">
+.simple_overlay {
+ 
+    /* must be initially hidden */
+    display:none;
+ 
+    /* place overlay on top of other elements */
+    z-index:10000;
+ 
+    /* styling */
+    background-color:#333;
+ 
+    width:675px;
+    min-height:200px;
+    border:1px solid #666;
+	color:#FFF;
+    /* CSS3 styling for latest browsers */
+    -moz-box-shadow:0 0 90px 5px #000;
+    -webkit-box-shadow: 0 0 90px #000;
+}
+ 
+/* close button positioned on upper right corner */
+.simple_overlay .close {
+    background-image:url(images/close.png);
+    position:absolute;
+    right:-15px;
+    top:-15px;
+    cursor:pointer;
+    height:35px;
+    width:35px;
+}
+</style>
+
+
+
 		<!-- Main Wrapper -->
 			<div id="main-wrapper">
 
@@ -96,10 +131,25 @@
 													$thisHeaderInit = $headerChildren[$x];
 													?>
                                                 <div class="row 12u">
-                                                	<div class="4u" style="border: 1px solid grey; padding-top:0; margin-top:5px;">
+                                                	<div class="4u" style="border: 1px solid grey; padding-top:0; margin-top:5px;" id="headerinitst<? echo $x; ?>">
                                                         Text: <? echo $thisHeaderInit->getText(); ?><br />
                                                         Icon: <? echo $thisHeaderInit->getIcon()." <span class='".$thisHeaderInit->getIcon()."'></span>"; ?><br />
-                                                        URL: <? echo $thisHeaderInit->getURL(); ?>
+                                                        URL: <? echo $thisHeaderInit->getURL(); ?><br />
+                                                        <a rel="#headerinit<? echo $x; ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Edit</a>
+                                                        <div class="simple_overlay" id="headerinit<? echo $x; ?>">
+                                                        	<p style="margin-left:10px;">
+                                                            <form style="margin-left:10px; margin-right:10px;" name="headerinit<? echo $x; ?>" action="func/header.edit.php" method="post">
+                                                            	<input type="hidden" name="x" value="<? echo $x; ?>" />
+                                                            	<h3 style="color:#FFF; margin-bottom:5px;">Text (Be sure to keep the &lt;span&gt; &amp; &lt;/span&gt;</h3>
+                                                                <input type="text" name="text" value="<? echo $thisHeaderInit->getText(); ?>" class="text"/>
+                                                                <h3 style="color:#FFF; margin-bottom:5px;">Icon</h3>
+                                                                <input type="text" name="icon" value="<? echo $thisHeaderInit->getIcon(); ?>" class="text" />
+                                                                <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
+                                                                <input type="text" name="url" value="<? echo $thisHeaderInit->getURL(); ?>" class="text" />
+                                                                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['headerinit<? echo $x; ?>'].submit(); return false;">Save</a></center>
+                                                            </form>
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                     <div class="8u" style="padding-top:0;">
                                                     	<?
@@ -111,12 +161,35 @@
                                                                 	<?
 																	if(get_class($thisParentsChildren[$y])=="PolyHeaderLinkChild"){
 																		?>
-                                                                        <div class="12u" style="border: 1px solid grey; padding-top:0; margin-top:5px;">
+                                                                        <div class="12u" style="border: 1px solid grey; padding-top:0; margin-top:5px;" id="thisParentsChildrenst<? echo $y; ?>">
                                                                             <?
 																			echo "Text: ".$thisParentsChildren[$y]->getText()."<br>";
 																			echo "URL: ".$thisParentsChildren[$y]->getURL()."<br>";
-																			echo "Target: ".$thisParentsChildren[$y]->getTarget();
-																			?>
+																			if($thisParentsChildren[$y]->getTarget()=="_blank"){
+																				echo "Open in: New tab";
+																			} else {
+																				echo "Open in: Same tab";
+																			}
+																			
+																			?><br />
+                                                                            <a rel="#thisParentsChildren<? echo $y; ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Edit</a>
+                            <div class="simple_overlay" id="thisParentsChildren<? echo $y; ?>">
+                                <p style="margin-left:10px;">
+                                <form style="margin-left:10px; margin-right:10px;" name="thisParentsChildren<? echo $y; ?>" action="func/header.edit.php" method="post">
+                                    <input type="hidden" name="y" value="<? echo $y; ?>" />
+                                    <h3 style="color:#FFF; margin-bottom:5px;">Text (Be sure to keep the &lt;span&gt; &amp; &lt;/span&gt;</h3>
+                                    <input type="text" name="text" value="<? echo $thisParentsChildren[$y]->getText(); ?>" class="text"/>
+                                    <h3 style="color:#FFF; margin-bottom:5px;">Icon</h3>
+                                    <input type="text" name="url" value="<? echo $thisParentsChildren[$y]->getURL(); ?>" class="text" />
+                                    <h3 style="color:#FFF; margin-bottom:5px;">Open In</h3>
+                                    <select name="target">
+                                    	<option value="" <? if($thisParentsChildren[$y]->getTarget()==""){ echo "selected"; }?>>Same Tab</option>
+                                        <option value="_blank" <? if($thisParentsChildren[$y]->getTarget()=="_blank"){ echo "selected"; }?>>New Tab</option>
+                                    </select>
+                                    <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['thisParentsChildren<? echo $y; ?>'].submit(); return false;">Save</a></center>
+                                </form>
+                                </p>
+                            </div>
                                                                         </div>
                                                                         <?
 																	} else {
@@ -130,9 +203,13 @@
 																			?>
                                                                             <?
 																			for($z = 0; $z < count($childparentchild); $z++){
-																				echo "Text: ".$childparentchild[$z]->getText()."<br>";
-																				echo "URL: ".$childparentchild[$z]->getURL()."<br>";
-																				echo "Target: ".$childparentchild[$z]->getTarget();
+																				?>
+                                        <div class="row 12u" style="border: 1px solid grey; padding-top:0; margin-top:5px;" id="childparentchild<? echo $z; ?>">
+                                        	Text: <? echo $childparentchild[$z]->getText(); ?><br />
+                                            URL: <? echo $childparentchild[$z]->getURL(); ?><br />
+                                            <? if($childparentchild[$z]->getTarget()=="_blank"){ echo "Open in: New tab"; } else { echo "Open in: Same tab";} ?>
+                                        </div>
+                                                                                <?
 																			}
 																			?>
                                                                         </div>
