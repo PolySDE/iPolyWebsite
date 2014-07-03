@@ -124,7 +124,19 @@
                             </div>
                             <?
 														} else {
-															echo $thisParentsChildren[$y]->getText()."e";
+															?>
+							<div class="simple_overlay" id="thisParentsChildrenx<? echo $x; ?>y<? echo $y; ?>">
+                                <p style="margin-left:10px;">
+                                <form style="margin-left:10px; margin-right:10px;" name="thisParentsChildrenx<? echo $x; ?>y<? echo $y; ?>" action="func/header.edit.php" method="post">
+                                	<input type="hidden" name="x" value="<? echo $x; ?>" />
+                                    <input type="hidden" name="y" value="<? echo $y; ?>" />
+                                    <h3 style="color:#FFF; margin-bottom:5px;">Text</h3>
+                                    <input type="text" name="text" value="<? echo $thisParentsChildren[$y]->getText(); ?>" class="text"/>
+                                    <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['thisParentsChildrenx<? echo $x; ?>y<? echo $y; ?>'].submit(); return false;">Save</a></center>
+                                </form>
+                                </p>
+                            </div>
+                           									<?
 															$childparentchild = $thisParentsChildren[$y]->getParent()->getChildren();
 															?>
 															<?
@@ -160,10 +172,10 @@
                                             <div class="row 12u">
                                             	<div class="row 12u">
                                                 	<div class="4u">
-                                                    	Parent
+                                                    	
                                                     </div>
                                                     <div class="8u">
-                                                    	Child
+                                                    	
                                                     </div>
                                                 </div>
                                                 <?
@@ -202,8 +214,9 @@
                                                                         <?
 																	} else {
 																		?>
-                                                                        <div class="4u" style="border: 1px solid grey; padding-top:0;">
-                                                                        	<? echo $thisParentsChildren[$y]->getText(); ?>
+                                                                        <div class="4u" style="border: 1px solid grey; padding-top:0; padding-left:30px;" id="thisParentsChildrenstx<? echo $x; ?>y<? echo $y; ?>">
+                                                                        	Text: <? echo $thisParentsChildren[$y]->getText(); ?>
+                                                                            <a rel="#thisParentsChildrenx<? echo $x; ?>y<? echo $y; ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Edit</a>
                                                                         </div>
                                                                         <div class="8u" style="border: 1px solid grey; padding-top:0;">
                                                                         	<?
