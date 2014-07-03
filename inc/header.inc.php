@@ -194,7 +194,7 @@
 								while($queryh->fetch()){
 									$object = unserialize(base64_decode($obj['value']));
 									if(isset($_SESSION['is_admin'])){
-										$object->paintAdmin();
+										$object->paintAdminLink();
 									} else {
 										$object->paint();
 									}

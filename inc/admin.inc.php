@@ -75,99 +75,16 @@
 												$queryh->bind_result($obj['id'], $obj['value']);
 												while($queryh->fetch()){
 													$object = unserialize(base64_decode($obj['value']));
+													$object->paintAdminOverlay();
 												}
 												$queryh->close();
 											}
 											$dbh->close();
-											$headerChildren = $object->getChildren();
-											for($x = 0; $x < count($headerChildren); $x++){
-												$thisHeaderInit = $headerChildren[$x];
-												?>
-                                                <div class="simple_overlay" id="headerinit<? echo $x; ?>">
-                                                    <p style="margin-left:10px;">
-                                                    <form style="margin-left:10px; margin-right:10px;" name="headerinit<? echo $x; ?>" action="func/header.edit.php" method="post">
-                                                        <input type="hidden" name="x" value="<? echo $x; ?>" />
-                                                        <h3 style="color:#FFF; margin-bottom:5px;">Text (Be sure to keep the &lt;span&gt; &amp; &lt;/span&gt;</h3>
-                                                        <input type="text" name="text" value="<? echo $thisHeaderInit->getText(); ?>" class="text"/>
-                                                        <h3 style="color:#FFF; margin-bottom:5px;">Icon <a href="http://fontawesome.io/icons/" target="_blank"><i>List of Icons</i></a> <font color="red">Be sure to keep the <i>fa</i>!</font></h3>
-                                                        <input type="text" name="icon" value="<? echo $thisHeaderInit->getIcon(); ?>" class="text" />
-                                                        <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
-                                                        <input type="text" name="url" value="<? echo $thisHeaderInit->getURL(); ?>" class="text" />
-                                                        <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['headerinit<? echo $x; ?>'].submit(); return false;">Save</a></center>
-                                                    </form>
-                                                    </p>
-                                                </div>
-                                                <?
-												if($thisHeaderInit->getParent()!=null){
-													$thisParentsChildren = $thisHeaderInit->getParent()->getChildren();
-													for($y = 0; $y < count($thisParentsChildren); $y++){
-														if(get_class($thisParentsChildren[$y])=="PolyHeaderLinkChild"){
-															//info
-															?>
-							<div class="simple_overlay" id="thisParentsChildrenx<? echo $x; ?>y<? echo $y; ?>">
-                                <p style="margin-left:10px;">
-                                <form style="margin-left:10px; margin-right:10px;" name="thisParentsChildrenx<? echo $x; ?>y<? echo $y; ?>" action="func/header.edit.php" method="post">
-                                <input type="hidden" name="x" value="<? echo $x; ?>" />
-                                    <input type="hidden" name="y" value="<? echo $y; ?>" />
-                                    <h3 style="color:#FFF; margin-bottom:5px;">Text</h3>
-                                    <input type="text" name="text" value="<? echo $thisParentsChildren[$y]->getText(); ?>" class="text"/>
-                                    <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
-                                    <input type="text" name="url" value="<? echo $thisParentsChildren[$y]->getURL(); ?>" class="text" />
-                                    <h3 style="color:#FFF; margin-bottom:5px;">Open In</h3>
-                                    <select name="target">
-                                    	<option value="" <? if($thisParentsChildren[$y]->getTarget()==""){ echo "selected"; }?>>Same Tab</option>
-                                        <option value="_blank" <? if($thisParentsChildren[$y]->getTarget()=="_blank"){ echo "selected"; }?>>New Tab</option>
-                                    </select>
-                                    <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['thisParentsChildrenx<? echo $x; ?>y<? echo $y; ?>'].submit(); return false;">Save</a></center>
-                                </form>
-                                </p>
-                            </div>
-                            <?
-														} else {
-															?>
-							<div class="simple_overlay" id="thisParentsChildrenx<? echo $x; ?>y<? echo $y; ?>">
-                                <p style="margin-left:10px;">
-                                <form style="margin-left:10px; margin-right:10px;" name="thisParentsChildrenx<? echo $x; ?>y<? echo $y; ?>" action="func/header.edit.php" method="post">
-                                	<input type="hidden" name="x" value="<? echo $x; ?>" />
-                                    <input type="hidden" name="y" value="<? echo $y; ?>" />
-                                    <h3 style="color:#FFF; margin-bottom:5px;">Text</h3>
-                                    <input type="text" name="text" value="<? echo $thisParentsChildren[$y]->getText(); ?>" class="text"/>
-                                    <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['thisParentsChildrenx<? echo $x; ?>y<? echo $y; ?>'].submit(); return false;">Save</a></center>
-                                </form>
-                                </p>
-                            </div>
-                           									<?
-															$childparentchild = $thisParentsChildren[$y]->getParent()->getChildren();
-															?>
-															<?
-															for($z = 0; $z < count($childparentchild); $z++){
-
-							?>
-                            <div class="simple_overlay" id="childparentchildx<? echo $x; ?>y<? echo $y;?>z<? echo $z; ?>">
-                                <p style="margin-left:10px;">
-                                <form style="margin-left:10px; margin-right:10px;" name="childparentchildx<? echo $x; ?>y<? echo $y;?>z<? echo $z; ?>" action="func/header.edit.php" method="post">
-                                	<input type="hidden" name="x" value="<? echo $x; ?>" />
-                                	<input type="hidden" name="y" value="<? echo $y; ?>" />
-                                    <input type="hidden" name="z" value="<? echo $z; ?>" />
-                                    <h3 style="color:#FFF; margin-bottom:5px;">Text</h3>
-                                    <input type="text" name="text" value="<? echo $childparentchild[$z]->getText(); ?>" class="text"/>
-                                    <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
-                                    <input type="text" name="url" value="<? echo $childparentchild[$z]->getURL(); ?>" class="text" />
-                                    <h3 style="color:#FFF; margin-bottom:5px;">Open In</h3>
-                                    <select name="target">
-                                    	<option value="" <? if($childparentchild[$z]->getTarget()==""){ echo "selected"; }?>>Same Tab</option>
-                                        <option value="_blank" <? if($childparentchild[$z]->getTarget()=="_blank"){ echo "selected"; }?>>New Tab</option>
-                                    </select>
-                                    <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['childparentchildx<? echo $x; ?>y<? echo $y;?>z<? echo $z; ?>'].submit(); return false;">Save</a></center>
-                                </form>
-                                </p>
-                            </div>
-                            <?
-															}
-														}
-													}
-												}
-											}
+											
+											$object->paintAdminPanel();
+											?>
+                                            <?
+											/*
 											?>
                                             <div class="row 12u">
                                             	<div class="row 12u">
@@ -179,6 +96,8 @@
                                                     </div>
                                                 </div>
                                                 <?
+												
+												$headerChildren = $object->getChildren();
 												for($x = 0; $x < count($headerChildren); $x++){
 													$thisHeaderInit = $headerChildren[$x];
 													?>
@@ -249,6 +168,9 @@
 												}
 												?>
                                             </div>
+                                            <?
+											*/
+											?>
                                             </p>
                                         </article>
                                         <?

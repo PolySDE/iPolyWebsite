@@ -7,23 +7,35 @@ class PolyHeader {
 		$this->childInits = $childInits;
 	}
 	function paint(){
-		//echo htmlspecialchars('<ul>')."<br>";
 		echo "<ul>";
 		for($x = 0; $x < count($this->childInits); $x++){
 			$this->childInits[$x]->paint();
 		}
-		//echo htmlspecialchars('</ul>');
 		echo "</ul>";
 	}
-	function paintAdmin(){
-		//echo htmlspecialchars('<ul>')."<br>";
+	function paintAdminLink(){
 		echo "<ul>";
 		for($x = 0; $x < count($this->childInits); $x++){
 			$this->childInits[$x]->paint();
 		}
-		//echo htmlspecialchars('</ul>');
 		echo "<li><a class='fa fa-cog' href='?p=admin'><span>Admin Panel</span></a>";
 		echo "</ul>";
+	}
+	function paintAdminOverlay(){
+		for($x = 0; $x < count($this->childInits); $x++){
+			$this->childInits[$x]->paintAdminOverlay();
+		}
+	}
+	function paintAdminPanel(){
+		?>
+        <div class="row 12u">
+        <?
+		for($x = 0; $x < count($this->childInits); $x++){
+			$this->childInits[$x]->paintAdminPanel();
+		}
+		?>
+        </div>
+        <?
 	}
 	function serializeThis(){
 		return base64_encode(serialize($this));
@@ -34,25 +46,59 @@ class PolyHeader {
 	function setChildren($children){
 		$this->childInits = $children;
 	}
+	function updatePolyHeaderInit($uuid, $text, $icon, $url){
+		for($x = 0; $x < count($this->childInits); $x++){
+			if($this->childInits[$x]->uuid==$uuid){
+				$this->childInits[$x]->setText($text);
+				$this->childInits[$x]->setIcon($icon);
+				$this->childInits[$x]->setURL($url);
+			}
+		}
+	}
+	function updatePolyHeaderLinkChild($uuid, $url, $text, $target){
+		for($x = 0; $x < count($this->childInits); $x++){
+			$this->childInits[$x]->updatePolyHeaderLinkChild($uuid, $url, $text, $target);
+		}
+	}
+	function updatePolyHeaderExpandChild($uuid, $text){
+		for($x = 0; $x < count($this->childInits); $x++){
+			$this->childInits[$x]->updatePolyHeaderExpandChild($uuid, $text);
+		}
+	}
 }
 class PolyHeaderInit {
-	public $icon, $url, $text, $parentObject;
+	public $icon, $url, $text, $parentObject, $uuid;
 	function __construct($icon, $url, $text, $parent = null){
 		$this->icon		= $icon;
 		$this->url		= $url;
 		$this->text 	= $text;
 		$this->parentObject = $parent;
+		$this->uuid = uniqid();
 	}
 	function paint(){
-		//echo htmlspecialchars('<li>')."<br>";
 		echo "<li>";
-		//echo htmlspecialchars('<a class="'.$this->icon.'" href="'.$this->url.'">'.$this->text.'</a>')."<br>";
 		echo '<a class="'.$this->icon.'" href="'.$this->url.'">'.$this->text.'</a>';
 		if($this->parentObject != null){
 			$this->parentObject->paint();
 		}
-		//echo htmlspecialchars('</li>')."<br>";
 		echo "</li>";
+	}
+	function paintAdminPanel(){
+		?>
+        <div class="row 12u">
+            <div class="4u" style="padding-top:0; margin-top:5px;" id="<? echo $this->getUUID(); ?>">
+                Text: <? echo $this->getText(); ?><br />
+                Icon: <? echo $this->getIcon()." <span class='".$this->getIcon()."'></span>"; ?><br />
+                URL: <? echo $this->getURL(); ?><br />
+                <a rel="#<? echo $this->getUUID(); ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Edit</a>
+            </div>
+            <?
+			if($this->parentObject != null){
+				$this->parentObject->paintAdminPanelInit();
+			}
+			?>
+        </div>
+        <?
 	}
 	function getIcon(){
 		return $this->icon;
@@ -78,20 +124,82 @@ class PolyHeaderInit {
 	function setParent($parent){
 		$this->parentObject = $parent;
 	}
+	function getUUID(){
+		return $this->uuid;
+	}
+	function updatePolyHeaderLinkChild($uuid, $url, $text, $target){
+		if($this->parentObject!=null){
+			$this->parentObject->updatePolyHeaderLinkChild($uuid, $url, $text, $target);
+		}
+	}
+	function updatePolyHeaderExpandChild($uuid, $text){
+		if($this->parentObject!=null){
+			$this->parentObject->updatePolyHeaderExpandChild($uuid, $text);
+		}
+	}
+	function paintAdminOverlay(){
+		?>
+        <div class="simple_overlay" id="<? echo $this->getUUID(); ?>">
+            <p style="margin-left:10px;">
+            <form style="margin-left:10px; margin-right:10px;" name="<? echo $this->getUUID(); ?>" action="func/header.edit.php" method="post">
+                <input type="hidden" name="uuid" value="<? echo $this->getUUID(); ?>" />
+                <h3 style="color:#FFF; margin-bottom:5px;">Text (Be sure to keep the &lt;span&gt; &amp; &lt;/span&gt;</h3>
+                <input type="text" name="text" value="<? echo $this->getText(); ?>" class="text"/>
+                <h3 style="color:#FFF; margin-bottom:5px;">Icon <a href="http://fontawesome.io/icons/" target="_blank"><i>List of Icons</i></a> <font color="red">Be sure to keep the <i>fa</i>!</font></h3>
+                <input type="text" name="icon" value="<? echo $this->getIcon(); ?>" class="text" />
+                <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
+                <input type="text" name="url" value="<? echo $this->getURL(); ?>" class="text" />
+                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['<? echo $this->getUUID(); ?>'].submit(); return false;">Save</a></center>
+            </form>
+            </p>
+        </div>
+        <?
+		if($this->parentObject != null){
+			$this->parentObject->paintAdminOverlay();
+		}
+	}
 }
 class PolyHeaderLinkParent {
-	public $children;
+	public $children, $uuid;
 	function __construct($children = array()){
 		$this->children = $children;
+		$this->uuid = uniqid();
 	}
 	function paint(){
-		//echo htmlspecialchars('<ul>')."<br>";
 		echo "<ul>";
 		for($x = 0; $x < count($this->children); $x++){
 			$this->children[$x]->paint();
 		}
-		//echo htmlspecialchars('</ul>')."<br>";
 		echo "</ul>";
+	}
+	function paintAdminPanelInit(){
+		?>
+        <div class="8u" style="padding-top:0;">
+        	<div class="row 12u" style=" padding-top:0;">
+            <?
+			for($x = 0; $x < count($this->children); $x++){
+				$this->children[$x]->paintAdminPanel();
+			}
+			?>
+            </div>
+        </div>
+        <?
+	}
+	function paintAdminPanel(){
+		?>
+        <div class="row 12u" style=" padding-top:0;">
+        <?
+        for($x = 0; $x < count($this->children); $x++){
+            $this->children[$x]->paintAdminPanel();
+        }
+        ?>
+        </div>
+        <?
+	}
+	function paintAdminOverlay(){
+		for($x = 0; $x < count($this->children); $x++){
+			$this->children[$x]->paintAdminOverlay();
+		}
 	}
 	function getChildren(){
 		return $this->children;
@@ -99,21 +207,78 @@ class PolyHeaderLinkParent {
 	function setChildren($children){
 		$this->children = $children;
 	}
+	function getUUID(){
+		return $this->uuid;
+	}
+	function updatePolyHeaderLinkChild($uuid, $url, $text, $target){
+		for($x = 0; $x < count($this->children); $x++){
+			if(get_class($this->children[$x])=="PolyHeaderLinkChild"){
+				if($this->children[$x]->uuid==$uuid){
+					$this->children[$x]->setText($text);
+					$this->children[$x]->setURL($url);
+					$this->children[$x]->setTarget($target);
+				}
+			} else if(get_class($this->children[$x])=="PolyHeaderExpandChild"){
+				$this->children[$x]->updatePolyHeaderLinkChild($uuid, $url, $text, $target);
+			}
+		}
+	}
+	function updatePolyHeaderExpandChild($uuid, $text){
+		for($x = 0; $x < count($this->children); $x++){
+			if(get_class($this->children[$x])=="PolyHeaderExpandChild"){
+				if($this->children[$x]->uuid==$uuid){
+					$this->children[$x]->setText($text);
+				} else {
+					$this->children[$x]->updatePolyHeaderExpandChild($uuid, $text);
+				}
+			}
+		}
+	}
 }
 class PolyHeaderExpandChild {
-	public $text, $childrenP;
+	public $text, $childrenP, $uuid;
 	function __construct($text, $childrenP){
 		$this->text = $text;
 		$this->childrenP = $childrenP;
+		$this->uuid = uniqid();
 	}
 	function paint(){
-		//echo htmlspecialchars('<li>')."<br>";
 		echo '<li>';
-		//echo htmlspecialchars('<a href=""><div style="float:left;">'.$this->text.'</div><i class="fa fa-arrow-right" style="font-size:12px; float:right;"></i><div style="clear:both;"></div></a>')."<br>";
 		echo '<a href=""><div style="float:left;">'.$this->text.'</div><i class="fa fa-arrow-right" style="font-size:12px; float:right;"></i><div style="clear:both;"></div></a>';
 		$this->childrenP->paint();
-		//echo htmlspecialchars('</li>')."<br>";
 		echo '</li>';
+	}
+	function paintAdminPanel(){
+		?>
+        <div class="row 12u">
+            <div class="4u" style="padding-top:0; padding-left:30px;" id="<? echo $this->uuid; ?>">
+                Text: <? echo $this->getText(); ?>
+                <a rel="#<? echo $this->uuid; ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Edit</a>
+            </div>
+            <div class="8u">
+                <?
+                if($this->childrenP!=null){
+                    $this->childrenP->paintAdminPanel();
+                }
+                ?>
+            </div>
+        </div>
+        <?
+	}
+	function paintAdminOverlay(){
+		?>
+        <div class="simple_overlay" id="<? echo $this->uuid; ?>">
+            <p style="margin-left:10px;">
+            <form style="margin-left:10px; margin-right:10px;" name="<? echo $this->uuid; ?>" action="func/header.edit.php" method="post">
+                <input type="hidden" name="uuid" value="<? echo $this->uuid; ?>" />
+                <h3 style="color:#FFF; margin-bottom:5px;">Text</h3>
+                <input type="text" name="text" value="<? echo $this->getText(); ?>" class="text"/>
+                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['<? echo $this->uuid; ?>'].submit(); return false;">Save</a></center>
+            </form>
+            </p>
+        </div>
+        <?
+		$this->childrenP->paintAdminOverlay();
 	}
 	function getParent(){
 		return $this->childrenP;
@@ -127,13 +292,23 @@ class PolyHeaderExpandChild {
 	function setText($text){
 		$this->text = $text;
 	}
+	function getUUID(){
+		return $this->uuid;
+	}
+	function updatePolyHeaderLinkChild($uuid, $url, $text, $target){
+		$this->childrenP->updatePolyHeaderLinkChild($uuid, $url, $text, $target);
+	}
+	function updatePolyHeaderExpandChild($uuid, $text){
+		$this->childrenP->updatePolyHeaderExpandChild($uuid, $text);
+	}
 }
 class PolyHeaderLinkChild {
-	public $url, $text, $target;
+	public $url, $text, $target, $uuid;
 	function __construct($url, $text, $target = ""){
 		$this->url	= $url;
 		$this->text	= $text;
 		$this->target = $target;
+		$this->uuid = uniqid();
 	}
 	function getURL(){
 		return $this->url;
@@ -154,8 +329,41 @@ class PolyHeaderLinkChild {
 		$this->target = $target;
 	}
 	function paint(){
-		//echo htmlspecialchars('<li><a href="'.$this->url.'">'.$this->text.'</a></li>')."<br>";
 		echo '<li><a href="'.$this->url.'">'.$this->text.'</a></li>';
+	}
+	function paintAdminPanel(){
+		?>
+		<div class="row 12u" style="padding-top:0; margin-top:5px;" id="<? echo $this->uuid; ?>">
+			Text: <? echo $this->getText(); ?><br />
+			URL: <? echo $this->getURL(); ?><br />
+			<? if($this->getTarget()=="_blank"){ echo "Open in: New tab"; } else { echo "Open in: Same tab";} ?><br />
+			<a rel="#<? echo $this->uuid; ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Edit</a>
+		</div>
+        <?
+	}
+	function paintAdminOverlay(){
+		?>
+        <div class="simple_overlay" id="<? echo $this->uuid; ?>">
+            <p style="margin-left:10px;">
+            <form style="margin-left:10px; margin-right:10px;" name="<? echo $this->uuid; ?>" action="func/header.edit.php" method="post">
+            	<input type="hidden" name="uuid" value="<? echo $this->uuid; ?>" />
+                <h3 style="color:#FFF; margin-bottom:5px;">Text</h3>
+                <input type="text" name="text" value="<? echo $this->getText(); ?>" class="text"/>
+                <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
+                <input type="text" name="url" value="<? echo $this->getURL(); ?>" class="text" />
+                <h3 style="color:#FFF; margin-bottom:5px;">Open In</h3>
+                <select name="target">
+                    <option value="" <? if($this->getTarget()==""){ echo "selected"; }?>>Same Tab</option>
+                    <option value="_blank" <? if($this->getTarget()=="_blank"){ echo "selected"; }?>>New Tab</option>
+                </select>
+                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['<? echo $this->uuid; ?>'].submit(); return false;">Save</a></center>
+            </form>
+            </p>
+        </div>
+        <?
+	}
+	function getUUID(){
+		return $this->uuid;
 	}
 }
 /*
