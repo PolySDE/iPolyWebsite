@@ -89,7 +89,7 @@
                                                         <input type="hidden" name="x" value="<? echo $x; ?>" />
                                                         <h3 style="color:#FFF; margin-bottom:5px;">Text (Be sure to keep the &lt;span&gt; &amp; &lt;/span&gt;</h3>
                                                         <input type="text" name="text" value="<? echo $thisHeaderInit->getText(); ?>" class="text"/>
-                                                        <h3 style="color:#FFF; margin-bottom:5px;">Icon</h3>
+                                                        <h3 style="color:#FFF; margin-bottom:5px;">Icon <a href="http://fontawesome.io/icons/" target="_blank"><i>List of Icons</i></a> <font color="red">Be sure to keep the <i>fa</i>!</font></h3>
                                                         <input type="text" name="icon" value="<? echo $thisHeaderInit->getIcon(); ?>" class="text" />
                                                         <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
                                                         <input type="text" name="url" value="<? echo $thisHeaderInit->getURL(); ?>" class="text" />
