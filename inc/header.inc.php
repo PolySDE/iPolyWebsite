@@ -86,7 +86,37 @@
             <?
 		}
 		?>
-        
+        <style type="text/css">
+		.simple_overlay {
+		 
+			/* must be initially hidden */
+			display:none;
+		 	position:relative;
+			/* place overlay on top of other elements */
+			z-index:10000;
+		 
+			/* styling */
+			background-color:#333;
+			width:675px;
+			min-height:200px;
+			border:1px solid #666;
+			color:#FFF;
+			/* CSS3 styling for latest browsers */
+			-moz-box-shadow:0 0 90px 5px #000;
+			-webkit-box-shadow: 0 0 90px #000;
+		}
+		 
+		/* close button positioned on upper right corner */
+		.simple_overlay .close {
+			background-image:url(images/close.png);
+			position:absolute;
+			right:-15px;
+			top:-15px;
+			cursor:pointer;
+			height:35px;
+			width:35px;
+		}
+		</style>
         <noscript>
 			<link rel="stylesheet" href="css/skel-noscript.css" />
 			<link rel="stylesheet" href="css/style.css" />
@@ -94,10 +124,39 @@
 		</noscript>
         <link rel="stylesheet" href="css/eaglefont.css" />
 	</head>
+    <?
+	$dbh = new mysqli($db_host, $db_user, $db_pass, $db_name);
+	if($dbh->connect_errno >0){
+		die("Mysql ERROR!! " . $dbh->connect_error);
+	}
+	if($queryh = $dbh->prepare("SELECT * FROM `settings` WHERE `id`='homepage_subtitle'")){
+		$queryh->execute();
+		$queryh->bind_result($obj['id'], $obj['value']);
+		while($queryh->fetch()){
+			$subtitle = $obj['value'];
+		}
+		$queryh->close();
+	}
+	$dbh->close();
+	?>
 	<body class="homepage">
 		<!-- Header Wrapper -->
 			<div id="header-wrapper">
 				<!-- Header -->
+                	<div class="row 12u">
+                    <div class="-3u">
+                	<div class="simple_overlay" id="editSubtitle" style="margin-left:auto; margin-right:auto; width:675px;">
+                        <p style="margin-left:10px;">
+                        	<h2 style="color:#FFF; margin-bottom:0px;">Edit Site Subtitle</h2>
+                            <form style="margin-left:10px; margin-right:10px;" action="func/homepage.edit.php" method="post" name="subtitleform">
+                            	<h3 style="color:#FFF;">Subtitle</h3>
+                                <input type="text" name="subtitle" value="<? echo $subtitle;?>" class="text">
+                                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['subtitleform'].submit(); return false;">Save</a></center>
+                            </form>
+                        </p>
+                    </div>
+                    </div>
+                    </div>
 					<div id="header" class="container">
                     <?
 					if(isset($_GET['p'])){
@@ -109,7 +168,16 @@
 					?>
 						<!-- Logo -->
 							<h1 id="logo"><a href="?p=home" class="disabled"><img src="images/IPoly_logo.svg" style="width:auto; height:150px; margin-bottom:20px; margin-top:0px"><br><div style="text-transform:none;">IPOLY HIGH SCHOOL</div></a></h1>
-							<p>Welcome to the new site of iPoly high school. This site is currently under construction.<br>To see the current site please visit us at <a href="http://ipolyhighschool.org">iPolyHighSchool.org</a>.</p>
+							<p>
+                            <?
+							echo $subtitle;
+							if(isset($_SESSION['is_admin'])){
+								?>
+                                <br><a rel="#editSubtitle" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Edit Subtitle</a>
+                                <?
+							}
+							?>
+                            </p>
 						<!-- Nav -->
                         <?
 					}
