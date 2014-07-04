@@ -26,13 +26,26 @@ class PolyHeader {
 			$this->childInits[$x]->paintAdminOverlay();
 		}
 	}
+	function paintAddNew($headerinit, $after = false){
+		if($after==false){
+		?>
+        <a rel="#before<? echo $headerinit->getUUID(); ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Add Dropdown Here</a>
+        <?
+		} else {
+		?>
+		<a rel="#after<? echo $headerinit->getUUID(); ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Add Dropdown Here</a>
+		<?
+		}
+	}
 	function paintAdminPanel(){
 		?>
         <div class="row 12u">
         <?
 		for($x = 0; $x < count($this->childInits); $x++){
+			$this->paintAddNew($this->childInits[$x]);
 			$this->childInits[$x]->paintAdminPanel();
 		}
+		$this->paintAddNew($this->childInits[count($this->childInits)-1], true);
 		?>
         </div>
         <?
@@ -178,8 +191,10 @@ class PolyHeaderLinkParent {
         	<div class="row 12u" style=" padding-top:0;">
             <?
 			for($x = 0; $x < count($this->children); $x++){
+				$this->paintAddNew($this->children[$x]);
 				$this->children[$x]->paintAdminPanel();
 			}
+			$this->paintAddNew($this->children[count($this->children)-1], true);
 			?>
             </div>
         </div>
@@ -190,11 +205,24 @@ class PolyHeaderLinkParent {
         <div class="row 12u" style=" padding-top:0;">
         <?
         for($x = 0; $x < count($this->children); $x++){
+			$this->paintAddNew($this->children[$x]);
             $this->children[$x]->paintAdminPanel();
         }
+		$this->paintAddNew($this->children[count($this->children)-1], true);
         ?>
         </div>
         <?
+	}
+	function paintAddNew($headerinit, $after = false){
+		if($after==false){
+		?>
+        <a rel="#before<? echo $headerinit->getUUID(); ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Add Link Here</a>
+        <?
+		} else {
+		?>
+		<a rel="#after<? echo $headerinit->getUUID(); ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Add Link Here</a>
+		<?
+		}
 	}
 	function paintAdminOverlay(){
 		for($x = 0; $x < count($this->children); $x++){
