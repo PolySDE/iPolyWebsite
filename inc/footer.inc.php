@@ -91,7 +91,7 @@
                                                  Fax: (909) 839-2326
 											</li>
 											<li class="fa fa-envelope">
-												<a href="mailto:ipolyhsmainoffice@gmail.com">iPoly Main Office</a>
+												<a href="mailto:romero_maria@lacoe.edu">iPoly Main Office</a>
 											</li>
 										</ul>
                                         <? /*
