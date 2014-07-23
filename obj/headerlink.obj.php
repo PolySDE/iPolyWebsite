@@ -26,6 +26,11 @@ class PolyHeader {
 			$this->childInits[$x]->paintAdminOverlay();
 		}
 	}
+	function paintAdminOverlayAdd(){
+		for($x = 0; $x < count($this->childInits); $x++){
+			$this->childInits[$x]->paintAdminOverlayAdd();
+		}
+	}
 	function paintAddNew($headerinit, $after = false){
 		if($after==false){
 		?>
@@ -171,6 +176,45 @@ class PolyHeaderInit {
 			$this->parentObject->paintAdminOverlay();
 		}
 	}
+	function paintAdminOverlayAdd(){
+		?>
+        <div class="simple_overlay" id="before<? echo $this->getUUID(); ?>">
+            <p style="margin-left:10px;">
+            <form style="margin-left:10px; margin-right:10px;" name="before<? echo $this->getUUID(); ?>" action="func/header.edit.php" method="post">
+                <input type="hidden" name="uuid" value="before<? echo $this->getUUID(); ?>" />
+                <input type="hidden" name="before" value="<? echo $this->getUUID(); ?>" />
+                <h3 style="color:#FFF; margin-bottom:5px;"><center>Add Drop-down Before <i><? echo $this->text; ?></i></center></h3>
+                <h3 style="color:#FFF; margin-bottom:5px;">Text (Be sure to keep the &lt;span&gt; &amp; &lt;/span&gt;</h3>
+                <input type="text" name="text" value="" class="text"/>
+                <h3 style="color:#FFF; margin-bottom:5px;">Icon <a href="http://fontawesome.io/icons/" target="_blank"><i>List of Icons</i></a> <font color="red">Be sure to keep the <i>fa</i>!</font></h3>
+                <input type="text" name="icon" value="fa " class="text" />
+                <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
+                <input type="text" name="url" value="" class="text" />
+                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['before<? echo $this->getUUID(); ?>'].submit(); return false;">Add (Doesn't Work Yet)</a></center>
+            </form>
+            </p>
+        </div>
+        <div class="simple_overlay" id="after<? echo $this->getUUID(); ?>">
+            <p style="margin-left:10px;">
+            <form style="margin-left:10px; margin-right:10px;" name="after<? echo $this->getUUID(); ?>" action="func/header.edit.php" method="post">
+                <input type="hidden" name="uuid" value="after<? echo $this->getUUID(); ?>" />
+                <input type="hidden" name="after" value="<? echo $this->getUUID(); ?>" />
+                <h3 style="color:#FFF; margin-bottom:5px;"><center>Add Drop-down After <i><? echo $this->text; ?></i></center></h3>
+                <h3 style="color:#FFF; margin-bottom:5px;">Text (Be sure to keep the &lt;span&gt; &amp; &lt;/span&gt;</h3>
+                <input type="text" name="text" value="" class="text"/>
+                <h3 style="color:#FFF; margin-bottom:5px;">Icon <a href="http://fontawesome.io/icons/" target="_blank"><i>List of Icons</i></a> <font color="red">Be sure to keep the <i>fa</i>!</font></h3>
+                <input type="text" name="icon" value="fa " class="text" />
+                <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
+                <input type="text" name="url" value="" class="text" />
+                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['after<? echo $this->getUUID(); ?>'].submit(); return false;">Add (Doesn't Work Yet)</a></center>
+            </form>
+            </p>
+        </div>
+        <?
+		if($this->parentObject != null){
+			$this->parentObject->paintAdminOverlayAdd();
+		}
+	}
 }
 class PolyHeaderLinkParent {
 	public $children, $uuid;
@@ -228,6 +272,12 @@ class PolyHeaderLinkParent {
 		for($x = 0; $x < count($this->children); $x++){
 			$this->children[$x]->paintAdminOverlay();
 		}
+	}
+	function paintAdminOverlayAdd(){
+		for($x = 0; $x < count($this->children); $x++){
+			$this->children[$x]->paintAdminOverlayAdd();
+		}
+		$this->children[count($this->children)-1]->paintAdminOverlayAdd(true);
 	}
 	function getChildren(){
 		return $this->children;
@@ -307,6 +357,38 @@ class PolyHeaderExpandChild {
         </div>
         <?
 		$this->childrenP->paintAdminOverlay();
+	}
+	function paintAdminOverlayAdd($after = false){
+		if(!$after){
+		?>
+        <div class="simple_overlay" id="before<? echo $this->uuid; ?>">
+            <p style="margin-left:10px;">
+            <form style="margin-left:10px; margin-right:10px;" name="before<? echo $this->uuid; ?>" action="func/header.edit.php" method="post">
+                <input type="hidden" name="uuid" value="before<? echo $this->uuid; ?>" />
+                <input type="hidden" name="before" value="<? echo $this->uuid; ?>" />
+                <h3 style="color:#FFF; margin-bottom:5px;">Text</h3>
+                <input type="text" name="text" value="<? echo $this->getText(); ?>" class="text"/>
+                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['before<? echo $this->uuid; ?>'].submit(); return false;">Add (Doesn't Work Yet)</a></center>
+            </form>
+            </p>
+        </div>
+        <?
+		} else {
+        ?>
+        <div class="simple_overlay" id="after<? echo $this->uuid; ?>">
+            <p style="margin-left:10px;">
+            <form style="margin-left:10px; margin-right:10px;" name="after<? echo $this->uuid; ?>" action="func/header.edit.php" method="post">
+                <input type="hidden" name="uuid" value="after<? echo $this->uuid; ?>" />
+                <input type="hidden" name="after" value="<? echo $this->uuid; ?>" />
+                <h3 style="color:#FFF; margin-bottom:5px;">Text</h3>
+                <input type="text" name="text" value="<? echo $this->getText(); ?>" class="text"/>
+                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['after<? echo $this->uuid; ?>'].submit(); return false;">Add (Doesn't Work Yet)</a></center>
+            </form>
+            </p>
+        </div>
+        <?
+		}
+		$this->childrenP->paintAdminOverlayAdd();
 	}
 	function getParent(){
 		return $this->childrenP;
@@ -389,6 +471,53 @@ class PolyHeaderLinkChild {
             </p>
         </div>
         <?
+	}
+	function paintAdminOverlayAdd($after = false){
+		if(!$after){
+		?>
+        <div class="simple_overlay" id="before<? echo $this->uuid; ?>">
+            <p style="margin-left:10px;">
+            <form style="margin-left:10px; margin-right:10px;" name="before<? echo $this->uuid; ?>" action="func/header.edit.php" method="post">
+            	<input type="hidden" name="uuid" value="before<? echo $this->uuid; ?>" />
+                <input type="hidden" name="before" value="<? echo $this->uuid; ?>" />
+                <h3 style="color:#FFF; margin-bottom:5px;"><center>Add Link Before <i><? echo $this->text; ?></i></center></h3>
+                <h3 style="color:#FFF; margin-bottom:5px;">Text</h3>
+                <input type="text" name="text" value="" class="text"/>
+                <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
+                <input type="text" name="url" value="" class="text" />
+                <h3 style="color:#FFF; margin-bottom:5px;">Open In</h3>
+                <select name="target">
+                    <option value="">Same Tab</option>
+                    <option value="_blank">New Tab</option>
+                </select>
+                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['before<? echo $this->uuid; ?>'].submit(); return false;">Add (Doesn't Work Yet)</a></center>
+            </form>
+            </p>
+        </div>
+        <?
+		} else {
+		?>
+        <div class="simple_overlay" id="after<? echo $this->uuid; ?>">
+            <p style="margin-left:10px;">
+            <form style="margin-left:10px; margin-right:10px;" name="after<? echo $this->uuid; ?>" action="func/header.edit.php" method="post">
+            	<input type="hidden" name="uuid" value="after<? echo $this->uuid; ?>" />
+                <input type="hidden" name="after" value="<? echo $this->uuid; ?>" />
+                <h3 style="color:#FFF; margin-bottom:5px;"><center>Add Link After <i><? echo $this->text; ?></i></center></h3>
+                <h3 style="color:#FFF; margin-bottom:5px;">Text</h3>
+                <input type="text" name="text" value="" class="text"/>
+                <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
+                <input type="text" name="url" value="" class="text" />
+                <h3 style="color:#FFF; margin-bottom:5px;">Open In</h3>
+                <select name="target">
+                    <option value="">Same Tab</option>
+                    <option value="_blank">New Tab</option>
+                </select>
+                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['after<? echo $this->uuid; ?>'].submit(); return false;">Add (Doesn't Work Yet)</a></center>
+            </form>
+            </p>
+        </div>
+        <?
+		}
 	}
 	function getUUID(){
 		return $this->uuid;

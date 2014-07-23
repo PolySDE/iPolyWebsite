@@ -76,6 +76,7 @@
 												while($queryh->fetch()){
 													$object = unserialize(base64_decode($obj['value']));
 													$object->paintAdminOverlay();
+													$object->paintAdminOverlayAdd();
 												}
 												$queryh->close();
 											}
