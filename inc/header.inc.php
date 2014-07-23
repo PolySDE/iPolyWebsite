@@ -73,7 +73,10 @@
 		</script>
 		<script type="text/javascript">
 		$(document).ready(function() {
-			$("a[rel]").overlay({left: 'center', fixed:false});
+			$("a[rel]").overlay({
+				left: 'center',
+				top: 50,
+				fixed: false});
 		});
 		</script>
         <?
@@ -91,10 +94,11 @@
 		 
 			/* must be initially hidden */
 			display:none;
-		 	position:relative;
+		 	/*position:absolute;
 			/* place overlay on top of other elements */
+			/*top:50%;
+			left: 50%;*/
 			z-index:10000;
-		 
 			/* styling */
 			background-color:#333;
 			width:675px;
