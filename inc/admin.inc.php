@@ -63,6 +63,7 @@
                                         <article class="is-post">
                                         	<header>
                                             	<h2>Header Links</h2>
+                                                <h3>You can now Add/Remove Dropdowns & Links!<br />Adding Links before/after an link expansion doesn't work yet, I have to rewrite how the expansion object is handled to be treated as a regular link.</h3>
                                             </header>
                                         	<p>
                                             <?

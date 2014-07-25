@@ -107,11 +107,28 @@ class PolyHeader {
 		}
 		if($toRemove!=-1){
 			unset($this->childInits[$toRemove]);
+			$temp = array_values($this->childInits);
+			$this->childInits = $temp;
 		}
 	}
 	function updatePolyHeaderLinkChild($uuid, $url, $text, $target){
 		for($x = 0; $x < count($this->childInits); $x++){
 			$this->childInits[$x]->updatePolyHeaderLinkChild($uuid, $url, $text, $target);
+		}
+	}
+	function removePolyHeaderLinkChild($uuid){
+		for($x = 0; $x < count($this->childInits); $x++){
+			$this->childInits[$x]->removePolyHeaderLinkChild($uuid);
+		}
+	}
+	function addPolyHeaderLinkChildBefore($linkChild, $beforeUUID){
+		for($x = 0; $x < count($this->childInits); $x++){
+			$this->childInits[$x]->addPolyHeaderLinkChildBefore($linkChild, $beforeUUID);
+		}
+	}
+	function addPolyHeaderLinkChildAfter($linkChild, $afterUUID){
+		for($x = 0; $x < count($this->childInits); $x++){
+			$this->childInits[$x]->addPolyHeaderLinkChildAfter($linkChild, $afterUUID);
 		}
 	}
 	function updatePolyHeaderExpandChild($uuid, $text){
@@ -186,6 +203,21 @@ class PolyHeaderInit {
 			$this->parentObject->updatePolyHeaderLinkChild($uuid, $url, $text, $target);
 		}
 	}
+	function removePolyHeaderLinkChild($uuid){
+		if($this->parentObject!=null){
+			$this->parentObject->removePolyHeaderLinkChild($uuid);
+		}
+	}
+	function addPolyHeaderLinkChildBefore($linkChild, $beforeUUID){
+		if($this->parentObject!=null){
+			$this->parentObject->addPolyHeaderLinkChildBefore($linkChild, $beforeUUID);
+		}
+	}
+	function addPolyHeaderLinkChildAfter($linkChild, $afterUUID){
+		if($this->parentObject!=null){
+			$this->parentObject->addPolyHeaderLinkChildAfter($linkChild, $afterUUID);
+		}
+	}
 	function updatePolyHeaderExpandChild($uuid, $text){
 		if($this->parentObject!=null){
 			$this->parentObject->updatePolyHeaderExpandChild($uuid, $text);
@@ -226,7 +258,7 @@ class PolyHeaderInit {
                 <input type="text" name="icon" value="fa " class="text" />
                 <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
                 <input type="text" name="url" value="" class="text" />
-                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['before<? echo $this->getUUID(); ?>'].submit(); return false;">Add (Doesn't Work Yet)</a></center>
+                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['before<? echo $this->getUUID(); ?>'].submit(); return false;">Add</a></center>
             </form>
             </p>
         </div>
@@ -242,7 +274,7 @@ class PolyHeaderInit {
                 <input type="text" name="icon" value="fa " class="text" />
                 <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
                 <input type="text" name="url" value="" class="text" />
-                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['after<? echo $this->getUUID(); ?>'].submit(); return false;">Add (Doesn't Work Yet)</a></center>
+                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['after<? echo $this->getUUID(); ?>'].submit(); return false;">Add</a></center>
             </form>
             </p>
         </div>
@@ -261,7 +293,9 @@ class PolyHeaderLinkParent {
 	function paint(){
 		echo "<ul>";
 		for($x = 0; $x < count($this->children); $x++){
-			$this->children[$x]->paint();
+			if($this->children[$x]!=null){
+				$this->children[$x]->paint();
+			}
 		}
 		echo "</ul>";
 	}
@@ -297,26 +331,40 @@ class PolyHeaderLinkParent {
 	}
 	function paintAddNew($headerinit, $after = false){
 		if($after==false){
-		?>
-        <a rel="#before<? echo $headerinit->getUUID(); ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Add Link Here</a>
-        <?
+			if(get_class($headerinit)=="PolyHeaderLinkChild"){
+				?>
+				<a rel="#before<? echo $headerinit->getUUID(); ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Add Link</a>
+				<?
+			}
+		/*  <a rel="#before<? echo $headerinit->getUUID(); ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Add Expand</a>*/
 		} else {
-		?>
-		<a rel="#after<? echo $headerinit->getUUID(); ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Add Link Here</a>
-		<?
+			if(get_class($headerinit)=="PolyHeaderLinkChild"){
+				?>
+				<a rel="#after<? echo $headerinit->getUUID(); ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Add Link</a>
+				<?
+			}
+		/*
+		  <a rel="#after<? echo $headerinit->getUUID(); ?>" class="button button-icon fa fa-pencil-square-o" style="padding: 0.5em 1.5em 0.5em 1.5em; margin-bottom:5px;">Add Expand</a>
+		  */
 		}
 	}
 	function paintAdminOverlay(){
 		for($x = 0; $x < count($this->children); $x++){
-			$this->children[$x]->paintAdminOverlay();
+			if($this->children[$x]!=null){
+				$this->children[$x]->paintAdminOverlay();
+			}
 		}
 	}
 	function paintAdminOverlayAdd(){
 		for($x = 0; $x < count($this->children); $x++){
-			$this->children[$x]->paintAdminOverlayAdd();
+			if($this->children[$x]!=null){
+				$this->children[$x]->paintAdminOverlayAdd();
+			}
 		}
 		if(count($this->children)>0){
-			$this->children[count($this->children)-1]->paintAdminOverlayAdd(true);
+			if($this->children[count($this->children)-1]!=null){
+				$this->children[count($this->children)-1]->paintAdminOverlayAdd(true);
+			}
 		}
 	}
 	function getChildren(){
@@ -339,6 +387,66 @@ class PolyHeaderLinkParent {
 			} else if(get_class($this->children[$x])=="PolyHeaderExpandChild"){
 				$this->children[$x]->updatePolyHeaderLinkChild($uuid, $url, $text, $target);
 			}
+		}
+	}
+	function removePolyHeaderLinkChild($uuid){
+		$unsetX = -1;
+		for($x = 0; $x < count($this->children); $x++){
+			if(get_class($this->children[$x])=="PolyHeaderLinkChild"){
+				if($this->children[$x]->uuid==$uuid){
+					$unsetX = $x;
+					break;
+				}
+			} else if(get_class($this->children[$x])=="PolyHeaderExpandChild"){
+				$this->children[$x]->removePolyHeaderLinkChild($uuid);
+			}
+		}
+		if($unsetX!=-1){
+			unset($this->children[$unsetX]);
+			$temp = array_values($this->children);
+			$this->children = $temp;
+		}
+	}
+	function addPolyHeaderLinkChildBefore($linkChild, $beforeUUID){
+		$beforeX = -1;
+		for($x = 0; $x < count($this->children); $x++){
+			if(get_class($this->children[$x])=="PolyHeaderLinkChild"){
+				if($this->children[$x]->uuid==$beforeUUID){
+					$beforeX = $x;
+					break;
+				}
+			} else if(get_class($this->children[$x])=="PolyHeaderExpandChild"){
+				if($this->children[$x]->uuid==$beforeUUID){
+					$beforeX = $x;
+					break;
+				} else {
+					$this->children[$x]->addPolyHeaderLinkChildBefore($linkChild, $beforeUUID);
+				}
+			}
+		}
+		if($beforeX!=-1){
+			array_splice($this->children, $beforeX, 0, array($linkChild));
+		}
+	}
+	function addPolyHeaderLinkChildAfter($linkChild, $afterUUID){
+		$beforeX = -1;
+		for($x = 0; $x < count($this->children); $x++){
+			if(get_class($this->children[$x])=="PolyHeaderLinkChild"){
+				if($this->children[$x]->uuid==$afterUUID){
+					$beforeX = $x + 1;
+					break;
+				}
+			} else if(get_class($this->children[$x])=="PolyHeaderExpandChild"){
+				if($this->children[$x]->uuid==$afterUUID){
+					$beforeX = $x + 1;
+					break;
+				} else {
+					$this->children[$x]->addPolyHeaderLinkChildAfter($linkChild, $afterUUID);
+				}
+			}
+		}
+		if($beforeX!=-1){
+			array_splice($this->children, $beforeX, 0, array($linkChild));
 		}
 	}
 	function updatePolyHeaderExpandChild($uuid, $text){
@@ -448,6 +556,15 @@ class PolyHeaderExpandChild {
 	function updatePolyHeaderLinkChild($uuid, $url, $text, $target){
 		$this->childrenP->updatePolyHeaderLinkChild($uuid, $url, $text, $target);
 	}
+	function removePolyHeaderLinkChild($uuid){
+		$this->childrenP->removePolyHeaderLinkChild($uuid);
+	}
+	function addPolyHeaderLinkChildBefore($linkChild, $beforeUUID){
+		$this->childrenP->addPolyHeaderLinkChildBefore($linkChild, $beforeUUID);
+	}
+	function addPolyHeaderLinkChildAfter($linkChild, $afterUUID){
+		$this->childrenP->addPolyHeaderLinkChildAfter($linkChild, $afterUUID);
+	}
 	function updatePolyHeaderExpandChild($uuid, $text){
 		$this->childrenP->updatePolyHeaderExpandChild($uuid, $text);
 	}
@@ -506,7 +623,7 @@ class PolyHeaderLinkChild {
                     <option value="" <? if($this->getTarget()==""){ echo "selected"; }?>>Same Tab</option>
                     <option value="_blank" <? if($this->getTarget()=="_blank"){ echo "selected"; }?>>New Tab</option>
                 </select>
-                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['<? echo $this->uuid; ?>'].submit(); return false;">Save</a></center>
+                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['<? echo $this->uuid; ?>'].submit(); return false;">Save</a>  <a href="func/header.edit.php?remove=<?  echo $this->getUUID(); ?>" class="button button-icon fa fa-eraser" style="margin-top:10px; background: #900;">Delete!</a></center>
             </form>
             </p>
         </div>
@@ -530,7 +647,7 @@ class PolyHeaderLinkChild {
                     <option value="">Same Tab</option>
                     <option value="_blank">New Tab</option>
                 </select>
-                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['before<? echo $this->uuid; ?>'].submit(); return false;">Add (Doesn't Work Yet)</a></center>
+                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['before<? echo $this->uuid; ?>'].submit(); return false;">Add</a>  <a href="func/header.edit.php?remove=<?  echo $this->getUUID(); ?>" class="button button-icon fa fa-eraser" style="margin-top:10px; background: #900;">Delete!</a></center>
             </form>
             </p>
         </div>
@@ -552,7 +669,7 @@ class PolyHeaderLinkChild {
                     <option value="">Same Tab</option>
                     <option value="_blank">New Tab</option>
                 </select>
-                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['after<? echo $this->uuid; ?>'].submit(); return false;">Add (Doesn't Work Yet)</a></center>
+                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['after<? echo $this->uuid; ?>'].submit(); return false;">Add</a></center>
             </form>
             </p>
         </div>

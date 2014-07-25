@@ -38,13 +38,24 @@ if(isset($_SESSION['is_admin'])){
 			$icon = $_POST['icon'];
 			$url  = $_POST['url'];
 			$object->addPolyHeaderInitBefore(new PolyHeaderInit($icon, $url, $text, new PolyHeaderLinkParent(array(new PolyHeaderLinkChild("", "Link 1", "")))), str_replace("before", "", $uuid));
-			//echo "Adding PolyHeaderInit before ".str_replace("before", "", $uuid);
 		} else if($type=="beforePolyHeaderLinkChild"){
-			$url  = $_POST['url'];
-			$target = $_POST['target'];
-			//echo "Adding PolyHeaderLinkChild before ".str_replace("before", "", $uuid);
-			//$object->addPolyHeaderLinkChildBefore(str_replace("before", "", $uuid), $url, $text, $target);
+			if(isset($_POST['url'])){
+				//Adding Link Child
+				$url  = $_POST['url'];
+				$target = $_POST['target'];
+				$object->addPolyHeaderLinkChildBefore(new PolyHeaderLinkChild($url, $text, $target), str_replace("before", "", $uuid));
+			} else {
+				//Adding Expand Child
+			}
 		} else if($type=="beforePolyHeaderExpandChild"){
+			if(isset($_POST['url'])){
+				//Adding Link Child
+				$url  = $_POST['url'];
+				$target = $_POST['target'];
+				$object->addPolyHeaderLinkChildBefore(new PolyHeaderLinkChild($url, $text, $target), str_replace("before", "", $uuid));
+			} else {
+				//Adding Expand Child
+			}
 			//$object->addPolyHeaderExpandChildBefore(str_replace("before", "", $uuid), $text);
 			//echo "Adding PolyHeaderExpandChild before ".str_replace("before", "", $uuid);
 		}
@@ -52,14 +63,25 @@ if(isset($_SESSION['is_admin'])){
 			$icon = $_POST['icon'];
 			$url  = $_POST['url'];
 			$object->addPolyHeaderInitAfter(new PolyHeaderInit($icon, $url, $text, new PolyHeaderLinkParent(array(new PolyHeaderLinkChild("", "Link 1", "")))), str_replace("after", "", $uuid));
-			//echo "Adding PolyHeaderInit after ".str_replace("after", "", $uuid);
-			//$object->addPolyHeaderInitAfter(str_replace("after", "", $uuid), $text, $icon, $url);
 		} else if($type=="afterPolyHeaderLinkChild"){
-			$url  = $_POST['url'];
-			$target = $_POST['target'];
-			//echo "Adding PolyHeaderLinkChild after ".str_replace("after", "", $uuid);
-			//$object->addPolyHeaderLinkChildAfter(str_replace("after", "", $uuid), $url, $text, $target);
+			if(isset($_POST['url'])){
+				//Adding Link Child
+				$url  = $_POST['url'];
+				$target = $_POST['target'];
+				$object->addPolyHeaderLinkChildAfter(new PolyHeaderLinkChild($url, $text, $target), str_replace("after", "", $uuid));
+			} else {
+				if(isset($_POST['url'])){
+					//Adding Link Child
+					$url  = $_POST['url'];
+					$target = $_POST['target'];
+					$object->addPolyHeaderLinkChildBefore(new PolyHeaderLinkChild($url, $text, $target), str_replace("before", "", $uuid));
+				} else {
+					//Adding Expand Child
+				}
+				//Adding Expand Child
+			}
 		} else if($type=="afterPolyHeaderExpandChild"){
+			
 			//echo "Adding PolyHeaderExpandChild after ".str_replace("after", "", $uuid);
 			//$object->addPolyHeaderExpandChildAfter(str_replace("after", "", $uuid), $text);
 		}
@@ -90,9 +112,7 @@ if(isset($_SESSION['is_admin'])){
 		if($type=="PolyHeaderInit"){
 			$object->removePolyHeaderInit($uuid);
 		} else if($type=="PolyHeaderLinkChild"){
-			//$url  = $_POST['url'];
-			//$target = $_POST['target'];
-			//$object->updatePolyHeaderLinkChild($uuid, $url, $text, $target);
+			$object->removePolyHeaderLinkChild($uuid);
 		} else if($type=="PolyHeaderExpandChild"){
 			//$object->updatePolyHeaderExpandChild($uuid, $text);
 		}
