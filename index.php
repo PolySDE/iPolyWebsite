@@ -7,7 +7,7 @@ include_once("obj/polysite.obj.php");
 include_once("obj/polypage.obj.php");
 include_once("obj/headerlink.obj.php");
 $thissite = new PolySite();
-if(isset($_SESSION['is_admin']) && true){
+if(isset($_SESSION['is_admin']) && false){
 ?>
 <center><h1>Site debugging is in progress...</h1></center>
 <?
