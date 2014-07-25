@@ -73,6 +73,42 @@ class PolyHeader {
 			}
 		}
 	}
+	function addPolyHeaderInitBefore($polyHeader, $beforeUUID){
+		$beforeX = -1;
+		for($x = 0; $x < count($this->childInits); $x++){
+			if($this->childInits[$x]->uuid==$beforeUUID){
+				$beforeX = $x;
+				break;
+			}
+		}
+		if($beforeX!=-1){
+			array_splice($this->childInits, $beforeX, 0, array($polyHeader));
+		}
+	}
+	function addPolyHeaderInitAfter($polyHeader, $afterUUID){
+		$beforeX = -1;
+		for($x = 0; $x < count($this->childInits); $x++){
+			if($this->childInits[$x]->uuid==$afterUUID){
+				$beforeX = $x + 1;
+				break;
+			}
+		}
+		if($beforeX!=-1){
+			array_splice($this->childInits, $beforeX, 0, array($polyHeader));
+		}
+	}
+	function removePolyHeaderInit($uuid){
+		$toRemove = -1;
+		for($x = 0; $x < count($this->childInits); $x++){
+			if($this->childInits[$x]->uuid==$uuid){
+				$toRemove = $x;
+				break;
+			}
+		}
+		if($toRemove!=-1){
+			unset($this->childInits[$toRemove]);
+		}
+	}
 	function updatePolyHeaderLinkChild($uuid, $url, $text, $target){
 		for($x = 0; $x < count($this->childInits); $x++){
 			$this->childInits[$x]->updatePolyHeaderLinkChild($uuid, $url, $text, $target);
@@ -91,7 +127,7 @@ class PolyHeaderInit {
 		$this->url		= $url;
 		$this->text 	= $text;
 		$this->parentObject = $parent;
-		$this->uuid = uniqid();
+		$this->uuid = get_class($this)."_".uniqid();
 	}
 	function paint(){
 		echo "<li>";
@@ -167,7 +203,7 @@ class PolyHeaderInit {
                 <input type="text" name="icon" value="<? echo $this->getIcon(); ?>" class="text" />
                 <h3 style="color:#FFF; margin-bottom:5px;">URL</h3>
                 <input type="text" name="url" value="<? echo $this->getURL(); ?>" class="text" />
-                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['<? echo $this->getUUID(); ?>'].submit(); return false;">Save</a></center>
+                <center><a href="#" class="button button-icon fa fa-save" style="margin-top:10px;" onclick="document.forms['<? echo $this->getUUID(); ?>'].submit(); return false;">Save</a>  <a href="func/header.edit.php?remove=<?  echo $this->getUUID(); ?>" class="button button-icon fa fa-eraser" style="margin-top:10px; background: #900;">Delete!</a></center>
             </form>
             </p>
         </div>
@@ -220,7 +256,7 @@ class PolyHeaderLinkParent {
 	public $children, $uuid;
 	function __construct($children = array()){
 		$this->children = $children;
-		$this->uuid = uniqid();
+		$this->uuid = get_class($this)."_".uniqid();
 	}
 	function paint(){
 		echo "<ul>";
@@ -238,7 +274,9 @@ class PolyHeaderLinkParent {
 				$this->paintAddNew($this->children[$x]);
 				$this->children[$x]->paintAdminPanel();
 			}
-			$this->paintAddNew($this->children[count($this->children)-1], true);
+			if(count($this->children)>0){
+				$this->paintAddNew($this->children[count($this->children)-1], true);
+			}
 			?>
             </div>
         </div>
@@ -277,7 +315,9 @@ class PolyHeaderLinkParent {
 		for($x = 0; $x < count($this->children); $x++){
 			$this->children[$x]->paintAdminOverlayAdd();
 		}
-		$this->children[count($this->children)-1]->paintAdminOverlayAdd(true);
+		if(count($this->children)>0){
+			$this->children[count($this->children)-1]->paintAdminOverlayAdd(true);
+		}
 	}
 	function getChildren(){
 		return $this->children;
@@ -318,7 +358,7 @@ class PolyHeaderExpandChild {
 	function __construct($text, $childrenP){
 		$this->text = $text;
 		$this->childrenP = $childrenP;
-		$this->uuid = uniqid();
+		$this->uuid = get_class($this)."_".uniqid();
 	}
 	function paint(){
 		echo '<li>';
@@ -418,7 +458,7 @@ class PolyHeaderLinkChild {
 		$this->url	= $url;
 		$this->text	= $text;
 		$this->target = $target;
-		$this->uuid = uniqid();
+		$this->uuid = get_class($this)."_".uniqid();
 	}
 	function getURL(){
 		return $this->url;
